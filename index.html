@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A research-backed Forward Deployed Engineer fieldbook and checklist.">
+  <title>FDE Fieldbook 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root {
+      color-scheme: dark;
+      --ink: #f6f3ff;
+      --muted: #bab8d4;
+      --quiet: #7e7b9d;
+      --canvas: #06071a;
+      --canvas-2: #11112c;
+      --panel: rgba(18, 18, 47, .72);
+      --line: rgba(207, 211, 255, .13);
+      --line-strong: rgba(207, 211, 255, .28);
+      --lime: #8ceeff;
+      --lime-soft: rgba(140, 238, 255, .13);
+      --coral: #ff8bc6;
+      --blue: #b8a5ff;
+      --rose: #f2b8ff;
+      --radius: 16px;
+      --shadow: 0 18px 48px rgba(0, 0, 0, .18);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 78% -13%, rgba(118, 91, 255, .36), transparent 31rem),
+        radial-gradient(circle at 93% 35%, rgba(255, 82, 189, .15), transparent 30rem),
+        radial-gradient(circle at 19% 82%, rgba(48, 205, 255, .12), transparent 31rem),
+        var(--canvas);
+      line-height: 1.45;
+      letter-spacing: -.012em;
+    }
+
+    body::before, body::after { content: ""; position: fixed; inset: 0; pointer-events: none; }
+    body::before {
+      z-index: 0;
+      opacity: .76;
+      background-image:
+        radial-gradient(circle at 4% 13%, rgba(255,255,255,.85) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 17% 42%, rgba(139,239,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 29% 8%, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 42% 79%, rgba(192,163,255,.8) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 54% 25%, rgba(255,255,255,.6) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 69% 66%, rgba(255,137,208,.8) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 81% 12%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 94% 82%, rgba(139,239,255,.85) 0 1px, transparent 1.5px);
+      background-size: 241px 317px, 331px 291px, 281px 389px, 353px 271px, 413px 347px, 239px 281px, 467px 331px, 293px 409px;
+      mix-blend-mode: screen;
+    }
+    body::after { z-index: 0; background: linear-gradient(90deg, rgba(6,7,26,.64), transparent 35%, transparent 70%, rgba(6,7,26,.45)); }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    .shell { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: 244px minmax(0, 1fr); }
+
+    .rail {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 28px 18px 22px;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12, 12, 37, .84), rgba(8, 9, 28, .68));
+      backdrop-filter: blur(24px) saturate(145%);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .wordmark { display: grid; gap: 4px; padding: 2px 10px; }
+    .wordmark strong { font-size: 14px; letter-spacing: -.03em; }
+    .wordmark span { color: var(--quiet); font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .rail nav { display: grid; gap: 3px; }
+    .rail nav a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 9px 10px;
+      border-radius: 9px;
+      font-size: 13px;
+      transition: background .18s ease, color .18s ease;
+    }
+    .rail nav a:hover, .rail nav a:focus-visible, .rail nav a.active { color: var(--ink); background: linear-gradient(90deg, rgba(138,241,255,.15), rgba(152,113,255,.13)); outline: none; }
+    .rail-bottom { margin-top: auto; padding: 14px 10px; border-top: 1px solid var(--line); display: grid; gap: 5px; }
+    .rail-bottom b { font-size: 12px; font-weight: 650; }
+    .rail-bottom p { margin: 0; color: var(--quiet); font-size: 11px; }
+
+    main { width: min(1420px, 100%); margin: 0 auto; padding: 32px clamp(20px, 4vw, 56px) 72px; }
+    .eyebrow { margin: 0 0 12px; color: var(--lime); font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .13em; text-transform: uppercase; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 42px; }
+    .topbar p { margin: 0; color: var(--muted); font-size: 13px; }
+    .date { color: var(--quiet) !important; font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace !important; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+
+    .hero { padding: clamp(24px, 4vw, 48px); border: 1px solid rgba(179, 184, 255, .25); border-radius: 24px; background: linear-gradient(132deg, rgba(25, 24, 69, .94), rgba(14, 16, 49, .82) 48%, rgba(35, 18, 65, .76)); box-shadow: 0 28px 70px rgba(2, 3, 19, .44), inset 0 1px 0 rgba(255,255,255,.065); overflow: hidden; position: relative; }
+    .hero::before { content: ""; position: absolute; width: 58%; height: 160%; right: 4%; top: -58%; background: conic-gradient(from 185deg, transparent 0 20%, rgba(98,246,255,.18), rgba(165,117,255,.32), rgba(255,112,194,.18), transparent 58%); filter: blur(14px); opacity: .9; transform: rotate(-17deg); pointer-events: none; }
+    .hero::after { content: ""; position: absolute; width: 310px; height: 310px; right: -76px; bottom: -165px; border-radius: 50%; border: 1px solid rgba(139,239,255,.33); box-shadow: 0 0 0 31px rgba(144,117,255,.07), 0 0 0 63px rgba(255,124,199,.035), 0 0 90px rgba(107,100,255,.34); pointer-events: none; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, .65fr); gap: 32px; align-items: end; }
+    h1 { max-width: 830px; margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: .98; letter-spacing: -.065em; font-weight: 650; background: linear-gradient(120deg, #ffffff 0%, #e3e6ff 42%, #b5eafe 88%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 660px; margin: 21px 0 0; color: #c7c6de; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.55; }
+    .hero-copy strong { color: var(--ink); font-weight: 620; }
+    .positioning { padding: 18px; border: 1px solid rgba(207,211,255,.16); border-radius: 13px; background: rgba(7,8,31,.36); backdrop-filter: blur(14px); }
+    .positioning p { margin: 0; }
+    .positioning .label { color: var(--quiet); font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .10em; text-transform: uppercase; }
+    .positioning .title { margin-top: 12px; font-size: 18px; line-height: 1.15; letter-spacing: -.035em; font-weight: 620; }
+    .positioning .note { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+    .metrics { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 38px; border: 1px solid rgba(207,211,255,.17); border-radius: 13px; overflow: hidden; background: var(--line); }
+    .metric { padding: 16px 18px; background: rgba(10,11,37,.57); }
+    .metric b { display: block; color: var(--ink); font-size: 26px; line-height: 1; letter-spacing: -.055em; font-weight: 650; }
+    .metric span { display: block; margin-top: 6px; color: var(--quiet); font-size: 11px; }
+
+    .section { margin-top: 76px; scroll-margin-top: 26px; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(25px, 3vw, 38px); line-height: 1.04; letter-spacing: -.052em; font-weight: 650; }
+    .section-head p { max-width: 480px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    .start-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, .6fr); gap: 16px; }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(29,28,70,.7), rgba(15,16,44,.72)); box-shadow: 0 18px 40px rgba(1,2,20,.18), inset 0 1px 0 rgba(255,255,255,.035); backdrop-filter: blur(14px) saturate(130%); }
+    .focus-card { padding: 23px; }
+    .card-label { margin: 0 0 12px; color: var(--quiet); font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .focus-card h3, .direction h3 { margin: 0; font-size: 18px; letter-spacing: -.035em; line-height: 1.15; }
+    .next-list { display: grid; gap: 1px; margin-top: 18px; border-top: 1px solid var(--line); }
+    .next-item { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 3px; }
+    .next-item b { font-size: 13px; font-weight: 610; }
+    .next-item span { color: var(--quiet); font-size: 11px; }
+    .direction { padding: 23px; display: grid; align-content: start; gap: 14px; }
+    .direction p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .text-button { width: fit-content; padding: 0; color: var(--lime); background: none; border: 0; font-size: 12px; font-weight: 650; }
+    .text-button:hover, .text-button:focus-visible { color: #efffc8; outline: none; text-decoration: underline; text-underline-offset: 3px; }
+
+    .toolbar { display: grid; grid-template-columns: minmax(190px, 1fr) auto; gap: 14px; align-items: center; margin-bottom: 14px; }
+    .search-wrap { border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.025); }
+    .search-wrap input { width: 100%; padding: 12px 14px; color: var(--ink); background: transparent; border: 0; outline: 0; font-size: 13px; }
+    .search-wrap input::placeholder { color: var(--quiet); }
+    .filter-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+    .filter { padding: 8px 10px; color: var(--muted); border: 1px solid transparent; border-radius: 999px; background: transparent; font-size: 11px; font-weight: 620; }
+    .filter:hover, .filter:focus-visible { color: var(--ink); border-color: var(--line); outline: none; }
+    .filter.selected { color: #08162a; background: linear-gradient(105deg, #8ceeff, #c0a8ff); }
+    .tool-note { margin: 0 0 18px; color: var(--quiet); font-size: 11px; }
+
+    .track-list { display: grid; gap: 10px; }
+    .track { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(105deg, rgba(24,24,60,.77), rgba(15,16,43,.73)); transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+    .track:hover { border-color: rgba(143,239,255,.35); transform: translateY(-1px); box-shadow: 0 16px 34px rgba(3,3,24,.22); }
+    .track.hidden { display: none; }
+    .track-head { width: 100%; padding: 18px 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; text-align: left; color: inherit; background: transparent; border: 0; }
+    .track-head:focus-visible { outline: 2px solid var(--lime); outline-offset: -3px; }
+    .track-title { display: grid; gap: 5px; }
+    .track-title small { color: var(--quiet); font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .09em; text-transform: uppercase; }
+    .track-title b { font-size: 16px; line-height: 1.2; letter-spacing: -.03em; font-weight: 640; }
+    .track-title span { color: var(--muted); font-size: 12px; }
+    .track-progress { min-width: 76px; text-align: right; align-self: center; color: var(--quiet); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .track-body { padding: 0 20px 20px; }
+    .track.open .track-body { display: block; }
+    .track:not(.open) .track-body { display: none; }
+    .task-list { border-top: 1px solid var(--line); }
+    .task {
+      display: grid;
+      grid-template-columns: 19px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: start;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .task:last-child { border-bottom: 0; padding-bottom: 0; }
+    .task input { appearance: none; width: 17px; height: 17px; margin: 2px 0 0; border: 1px solid rgba(241,238,228,.36); border-radius: 5px; background: transparent; cursor: pointer; position: relative; }
+    .task input:checked { border-color: var(--lime); background: var(--lime); }
+    .task input:checked::after { content: ""; position: absolute; width: 7px; height: 3px; border-left: 1.8px solid #14200b; border-bottom: 1.8px solid #14200b; transform: rotate(-45deg); top: 4px; left: 3.5px; }
+    .task input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .task-copy { display: grid; gap: 3px; }
+    .task-copy b { color: #e8e6df; font-size: 13px; line-height: 1.3; font-weight: 590; }
+    .task-copy span { color: var(--quiet); font-size: 11.5px; line-height: 1.45; }
+    .task.checked .task-copy b { color: var(--quiet); text-decoration: line-through; text-decoration-thickness: 1px; }
+    .task.checked .task-copy span { opacity: .62; }
+    .task-tag { margin-top: 2px; padding: 4px 7px; color: var(--quiet); border: 1px solid var(--line); border-radius: 99px; font: 700 9px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+    .empty { display: none; padding: 28px; border: 1px dashed var(--line-strong); border-radius: 14px; color: var(--muted); text-align: center; font-size: 13px; }
+    .empty.visible { display: block; }
+
+    .roadmap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, .72fr); gap: 16px; }
+    .plan { padding: 8px 20px; }
+    .phase { display: grid; grid-template-columns: 92px minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .phase:last-child { border-bottom: 0; }
+    .phase small { color: var(--lime); font: 700 10px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .phase b { display: block; font-size: 13px; font-weight: 620; }
+    .phase span { display: block; margin-top: 3px; color: var(--quiet); font-size: 11px; }
+    .phase em { color: var(--muted); font-size: 11px; font-style: normal; white-space: nowrap; }
+    .design-card { padding: 24px; background: linear-gradient(150deg, rgba(48,31,91,.7), rgba(14,16,48,.78)); }
+    .design-card h3 { margin: 0; font-size: 20px; letter-spacing: -.04em; }
+    .design-card p { margin: 13px 0 0; color: var(--muted); font-size: 13px; line-height: 1.56; }
+    .design-card .rule { margin-top: 21px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--lime); font-size: 12px; font-weight: 640; line-height: 1.45; }
+
+    .research-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 16px; }
+    .evidence { padding: 24px; }
+    .evidence h3 { margin: 0; font-size: 18px; letter-spacing: -.04em; }
+    .evidence-list { display: grid; gap: 0; margin-top: 18px; }
+    .evidence-item { padding: 15px 0; border-top: 1px solid var(--line); }
+    .evidence-item:first-child { border-top: 0; padding-top: 0; }
+    .evidence-item b { display: block; font-size: 13px; font-weight: 620; }
+    .evidence-item p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .gap-panel { padding: 24px; }
+    .gap-panel h3 { margin: 0; font-size: 18px; letter-spacing: -.04em; }
+    .gap-block { padding: 16px 0; border-top: 1px solid var(--line); }
+    .gap-block:first-of-type { margin-top: 17px; }
+    .gap-block b { color: var(--lime); font-size: 12px; font-weight: 650; }
+    .gap-block p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .sources { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+    .source { min-height: 132px; padding: 17px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); border-radius: 13px; background: rgba(25,27,23,.68); text-decoration: none; transition: transform .16s ease, border-color .16s ease, background .16s ease; }
+    .source:hover, .source:focus-visible { transform: translateY(-2px); border-color: rgba(199,243,106,.45); background: rgba(199,243,106,.055); outline: none; }
+    .source small { color: var(--quiet); font: 700 9px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .source b { margin-top: 11px; font-size: 13px; line-height: 1.25; font-weight: 620; letter-spacing: -.02em; }
+    .source span { margin-top: 10px; color: var(--muted); font-size: 10.5px; line-height: 1.4; }
+
+    .coverage-note { padding: 22px 24px; border: 1px solid rgba(143,239,255,.25); border-radius: 15px; background: linear-gradient(102deg, rgba(55,44,126,.64), rgba(20,22,59,.76)); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(245px,.8fr); gap: 24px; align-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.045); }
+    .coverage-note h3 { margin: 0; font-size: 19px; letter-spacing: -.04em; }
+    .coverage-note p { margin: 8px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.58; }
+    .coverage-note strong { color: var(--lime); font-weight: 650; }
+    .coverage-scale { display: grid; gap: 7px; }
+    .coverage-scale div { display: grid; grid-template-columns: 86px minmax(0,1fr); gap: 10px; align-items: baseline; }
+    .coverage-scale b { color: var(--lime); font: 700 9px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .coverage-scale span { color: var(--muted); font-size: 11px; line-height: 1.42; }
+    .atlas-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 16px; }
+    .stack-card { padding: 21px; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(145deg, rgba(27,28,71,.75), rgba(13,15,42,.78)); box-shadow: inset 0 1px 0 rgba(255,255,255,.035); }
+    .stack-card h3 { margin: 5px 0 0; font-size: 18px; letter-spacing: -.04em; line-height: 1.15; }
+    .stack-card > p { margin: 8px 0 0; color: var(--quiet); font-size: 11.5px; line-height: 1.5; }
+    .stack-rows { display: grid; gap: 0; margin-top: 17px; border-top: 1px solid var(--line); }
+    .stack-row { display: grid; grid-template-columns: 88px minmax(0,1fr); gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .stack-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .stack-row b { color: var(--lime); font: 700 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .07em; text-transform: uppercase; }
+    .stack-row span { color: var(--muted); font-size: 11.5px; line-height: 1.52; }
+
+    .hiring-gate { padding: clamp(24px, 3.5vw, 42px); border: 1px solid rgba(255,139,198,.26); border-radius: 20px; background: linear-gradient(133deg, rgba(72,30,89,.66), rgba(22,19,62,.83) 56%, rgba(16,18,51,.78)); box-shadow: 0 25px 70px rgba(2,2,23,.26), inset 0 1px 0 rgba(255,255,255,.04); }
+    .gate-head { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(250px,.88fr); gap: 28px; align-items: end; }
+    .gate-head h2 { max-width: 700px; }
+    .gate-head p { margin: 0; color: #cac7df; font-size: 13px; line-height: 1.58; }
+    .gate-head strong { color: var(--lime); }
+    .ready-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-top: 30px; }
+    .ready-card { padding: 18px; border: 1px solid rgba(207,211,255,.14); border-radius: 13px; background: rgba(8,10,35,.34); }
+    .ready-card b { display: block; font-size: 14px; line-height: 1.2; letter-spacing: -.025em; }
+    .ready-card span { display: block; margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.5; }
+
+    .capstone { padding: clamp(25px, 4vw, 46px); border: 1px solid rgba(147,235,255,.31); border-radius: 22px; background: linear-gradient(125deg, rgba(78,205,255,.15), rgba(35,26,88,.82) 46%, rgba(19,17,52,.84)); box-shadow: 0 25px 80px rgba(3,2,30,.32); position: relative; overflow: hidden; }
+    .capstone::after { content: ""; position: absolute; inset: auto -15% -190px auto; width: 480px; height: 480px; border: 1px solid rgba(196,163,255,.3); border-radius: 50%; box-shadow: 0 0 0 35px rgba(196,163,255,.045), 0 0 0 70px rgba(255,139,198,.03); pointer-events: none; }
+    .capstone-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .68fr); gap: 32px; align-items: end; }
+    .capstone h2 { max-width: 720px; font-size: clamp(31px, 4vw, 54px); }
+    .capstone p { max-width: 660px; margin: 16px 0 0; color: #c4c5bb; font-size: 14px; line-height: 1.6; }
+    .deliverables { display: grid; gap: 1px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--line); }
+    .deliverable { padding: 13px 15px; background: rgba(20,22,18,.72); }
+    .deliverable b { display: block; font-size: 12px; font-weight: 620; }
+    .deliverable span { display: block; margin-top: 3px; color: var(--quiet); font-size: 10.5px; line-height: 1.42; }
+    footer { margin-top: 66px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--quiet); font-size: 10px; }
+    footer p { margin: 0; }
+
+    @media (max-width: 960px) {
+      .shell { grid-template-columns: 1fr; }
+      .rail { position: relative; width: 100%; height: auto; padding: 17px 20px; border-right: 0; border-bottom: 1px solid var(--line); flex-direction: row; align-items: center; gap: 18px; overflow-x: auto; }
+      .wordmark { min-width: 84px; padding: 0; }
+      .rail nav { display: flex; gap: 2px; white-space: nowrap; }
+      .rail nav a { padding: 7px 9px; }
+      .rail-bottom { display: none; }
+      main { padding-top: 26px; }
+    }
+    @media (max-width: 720px) {
+      .topbar { margin-bottom: 26px; }
+      .topbar p:not(.date) { display: none; }
+      .hero { padding: 26px 20px; border-radius: 18px; }
+      .hero-grid, .start-grid, .roadmap, .research-layout, .capstone-grid { grid-template-columns: 1fr; }
+      .metrics { margin-top: 28px; }
+      .metric { padding: 13px; }
+      .metric b { font-size: 21px; }
+      .section { margin-top: 54px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 11px; }
+      .toolbar { grid-template-columns: 1fr; }
+      .filter-row { justify-content: flex-start; }
+      .task { grid-template-columns: 19px minmax(0, 1fr); }
+      .task-tag { display: none; }
+      .track-head { padding: 16px; }
+      .track-body { padding: 0 16px 16px; }
+      .phase { grid-template-columns: 75px minmax(0,1fr); gap: 10px; }
+      .phase em { grid-column: 2; }
+      .sources, .atlas-grid, .ready-grid { grid-template-columns: 1fr; }
+      .coverage-note { grid-template-columns: 1fr; padding: 20px; }
+      .gate-head { grid-template-columns: 1fr; }
+      footer { display: block; }
+      footer p + p { margin-top: 7px; }
+    }
+
+    /* Fieldwork redesign: editorial utility over generic dashboard chrome. */
+    :root {
+      --ink: #f4f5fa;
+      --muted: #a4a7b5;
+      --quiet: #737784;
+      --canvas: #090a0e;
+      --canvas-2: #11131a;
+      --panel: #101218;
+      --line: rgba(255, 255, 255, .105);
+      --line-strong: rgba(255, 255, 255, .19);
+      --lime: #b9f6d3;
+      --lime-soft: rgba(185, 246, 211, .11);
+      --blue: #9cbbff;
+      --coral: #ddaeff;
+      --rose: #ffc2e3;
+      --radius: 4px;
+      --shadow: none;
+      font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(900px 700px at 81% 10%, rgba(105, 94, 255, .12), transparent 65%),
+        radial-gradient(650px 500px at 54% 83%, rgba(45, 173, 214, .075), transparent 67%),
+        #090a0e;
+      letter-spacing: -.018em;
+    }
+    body::before {
+      opacity: .23;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        radial-gradient(circle at 23% 19%, rgba(255,255,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 76% 41%, rgba(186,246,211,.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 42% 78%, rgba(183,169,255,.78) 0 1px, transparent 1.5px);
+      background-size: 80px 80px, 80px 80px, 353px 397px, 517px 439px, 431px 491px;
+      mix-blend-mode: normal;
+    }
+    body::after { background: linear-gradient(90deg, rgba(9,10,14,.38), transparent 26%, transparent 78%, rgba(9,10,14,.26)); }
+
+    .shell { grid-template-columns: 228px minmax(0, 1fr); }
+    .rail {
+      padding: 30px 19px 22px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      background: rgba(9,10,14,.76);
+      backdrop-filter: blur(20px);
+      gap: 42px;
+    }
+    .wordmark { gap: 8px; padding: 0 9px; }
+    .wordmark strong { font-family: "DM Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .025em; font-weight: 500; }
+    .wordmark span { color: #787c89; font: 500 9px/1.45 "DM Mono", ui-monospace, monospace; letter-spacing: .11em; }
+    .rail nav { position: relative; gap: 4px; padding-top: 22px; }
+    .rail nav::before { content: "MAP"; position: absolute; top: 0; left: 9px; color: #707480; font: 500 9px/1 "DM Mono", ui-monospace, monospace; letter-spacing: .12em; }
+    .rail nav a { position: relative; padding: 10px 10px 10px 18px; border-radius: 0; color: #9498a5; font-size: 12px; font-weight: 600; }
+    .rail nav a::before { content: ""; position: absolute; left: 0; top: 50%; width: 5px; height: 1px; background: #575b68; transition: width .18s ease, background .18s ease; }
+    .rail nav a:hover, .rail nav a:focus-visible, .rail nav a.active { color: #f0f2f8; background: transparent; }
+    .rail nav a:hover::before, .rail nav a:focus-visible::before, .rail nav a.active::before { width: 11px; background: var(--lime); }
+    .rail-bottom { padding: 18px 9px; border-top-color: rgba(255,255,255,.08); }
+    .rail-bottom b { color: #e8eaf1; font-size: 11px; font-weight: 700; }
+    .rail-bottom p { color: #707480; font-size: 10px; line-height: 1.55; }
+
+    main { width: min(1500px, 100%); padding: 28px clamp(28px, 5vw, 76px) 112px; }
+    .topbar { min-height: 43px; margin-bottom: 38px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .topbar p { color: #858996; font-size: 11px; font-weight: 600; }
+    .date { color: var(--lime) !important; font: 500 9px/1 "DM Mono", ui-monospace, monospace !important; letter-spacing: .12em; }
+    .eyebrow { color: var(--lime); font: 500 10px/1.3 "DM Mono", ui-monospace, monospace; letter-spacing: .13em; }
+
+    .hero { min-height: 488px; padding: clamp(34px, 5vw, 68px); border: 1px solid rgba(255,255,255,.12); border-radius: 2px; background: linear-gradient(128deg, rgba(23,25,34,.94), rgba(14,15,21,.93) 59%, rgba(25,20,43,.88)); box-shadow: none; }
+    .hero::before { width: 49%; height: 140%; right: -9%; top: -34%; opacity: .64; filter: blur(2px); background: conic-gradient(from 165deg, transparent 0 26%, rgba(78,225,194,.13), rgba(126,116,255,.43), rgba(235,143,255,.20), transparent 63%); }
+    .hero::after { width: 410px; height: 410px; right: -152px; bottom: -190px; border-color: rgba(185,246,211,.2); box-shadow: 0 0 0 39px rgba(145,112,255,.04), 0 0 0 76px rgba(97,201,212,.025), 0 0 140px rgba(121,100,255,.21); }
+    .hero-grid { grid-template-columns: minmax(0, 1.42fr) minmax(260px, .58fr); gap: 64px; align-items: center; }
+    h1 { max-width: 850px; font-size: clamp(54px, 6.4vw, 96px); line-height: .91; letter-spacing: -.08em; font-weight: 800; background: linear-gradient(122deg, #fff 12%, #e8ecfb 58%, #b7e6f7 100%); -webkit-background-clip: text; background-clip: text; }
+    .hero-copy { max-width: 630px; margin-top: 26px; color: #bcc0cb; font-size: 16px; line-height: 1.65; }
+    .hero-copy strong { color: #f2f4fa; font-weight: 700; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 28px; }
+    .hero-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 17px; color: #08100e; background: var(--lime); border: 1px solid var(--lime); text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: -.01em; transition: background .18s ease, transform .18s ease; }
+    .hero-cta:hover, .hero-cta:focus-visible { background: #e0ffec; border-color: #e0ffec; transform: translateY(-1px); outline: none; }
+    .hero-link { color: #bac0cc; text-decoration: none; font-size: 11px; font-weight: 700; }
+    .hero-link:hover, .hero-link:focus-visible { color: var(--lime); outline: none; }
+    .positioning { position: relative; padding: 0 0 0 25px; border: 0; border-left: 1px solid rgba(185,246,211,.42); border-radius: 0; background: transparent; backdrop-filter: none; }
+    .positioning::before { content: ""; position: absolute; left: -5px; top: 0; width: 9px; height: 9px; border: 1px solid var(--lime); border-radius: 50%; background: #171922; }
+    .positioning .label { color: #8f94a2; font: 500 9px/1.3 "DM Mono", ui-monospace, monospace; letter-spacing: .14em; }
+    .positioning .title { margin-top: 16px; color: #f4f5fa; font-size: 30px; line-height: .98; letter-spacing: -.06em; font-weight: 700; }
+    .role-loop { display: grid; gap: 8px; margin-top: 23px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.11); }
+    .role-loop span { color: #aeb2bf; font: 500 10px/1.35 "DM Mono", ui-monospace, monospace; letter-spacing: .025em; }
+    .positioning .note { margin-top: 19px; color: #8b909d; font-size: 11px; line-height: 1.65; }
+    .metrics { display: flex; width: max-content; max-width: 100%; gap: 0; margin-top: 54px; border: 0; border-radius: 0; overflow: visible; background: transparent; }
+    .metric { min-width: 165px; padding: 0 30px; border-left: 1px solid rgba(255,255,255,.16); background: transparent; }
+    .metric:first-child { padding-left: 0; border-left: 0; }
+    .metric b { font-size: 27px; font-weight: 700; letter-spacing: -.06em; }
+    .metric span { margin-top: 6px; color: #858996; font: 500 9px/1.4 "DM Mono", ui-monospace, monospace; letter-spacing: .05em; text-transform: uppercase; }
+
+    .section { margin-top: 112px; scroll-margin-top: 30px; }
+    .section-head { align-items: flex-start; gap: 46px; margin-bottom: 31px; }
+    h2 { font-size: clamp(32px, 4vw, 53px); line-height: .98; letter-spacing: -.065em; font-weight: 800; }
+    .section-head p { max-width: 420px; padding-top: 10px; color: #999daa; font-size: 12px; line-height: 1.65; }
+
+    .start-grid { grid-template-columns: minmax(0, 1.45fr) minmax(250px, .55fr); gap: 0; border-top: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); }
+    .card { border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
+    .focus-card { padding: 30px 40px 32px 0; border-right: 1px solid rgba(255,255,255,.12); }
+    .card-label { margin-bottom: 15px; color: #858a98; font: 500 9px/1.3 "DM Mono", ui-monospace, monospace; letter-spacing: .13em; }
+    .focus-card h3, .direction h3 { font-size: 25px; line-height: 1.08; letter-spacing: -.055em; font-weight: 700; }
+    .next-list { margin-top: 25px; border-top-color: rgba(255,255,255,.11); }
+    .next-item { grid-template-columns: 34px minmax(0,1fr); column-gap: 12px; padding: 15px 0; border-bottom-color: rgba(255,255,255,.09); }
+    .next-item::before { content: "→"; grid-row: span 2; color: var(--lime); font: 400 17px/1 "DM Mono", ui-monospace, monospace; }
+    .next-item b { font-size: 13px; }
+    .next-item span { color: #7f8492; font-size: 11px; }
+    .direction { padding: 30px 0 30px 40px; }
+    .direction p { color: #9499a6; font-size: 12px; line-height: 1.65; }
+    .text-button { margin-top: 7px; color: var(--lime); font-size: 11px; font-weight: 700; }
+
+    .toolbar { grid-template-columns: minmax(230px, 1fr) auto; gap: 18px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .search-wrap { border: 0; border-radius: 0; background: transparent; }
+    .search-wrap input { padding: 9px 0; font-size: 14px; }
+    .search-wrap input::placeholder { color: #787d8b; }
+    .filter-row { gap: 0; }
+    .filter { padding: 8px 13px; color: #818694; border: 0; border-radius: 0; font: 500 10px/1.2 "DM Mono", ui-monospace, monospace; letter-spacing: .025em; }
+    .filter:hover, .filter:focus-visible { color: #f2f4fa; border: 0; }
+    .filter.selected { color: var(--lime); background: transparent; box-shadow: inset 0 -1px var(--lime); }
+    .tool-note { margin: 13px 0 21px; color: #737784; font: 500 9px/1.4 "DM Mono", ui-monospace, monospace; letter-spacing: .035em; }
+    .track-list { gap: 0; border-top: 1px solid rgba(255,255,255,.11); }
+    .track { border: 0; border-bottom: 1px solid rgba(255,255,255,.11); border-radius: 0; background: transparent; transition: background .2s ease; }
+    .track:hover { border-color: rgba(255,255,255,.15); transform: none; box-shadow: none; background: rgba(255,255,255,.022); }
+    .track-head { padding: 23px 0; gap: 28px; }
+    .track-head:focus-visible { outline: 1px solid var(--lime); outline-offset: -2px; }
+    .track-title { display: grid; grid-template-columns: 132px minmax(0,1fr); gap: 0 20px; align-items: baseline; }
+    .track-title small { grid-row: span 2; color: var(--lime); font: 500 9px/1.35 "DM Mono", ui-monospace, monospace; letter-spacing: .11em; }
+    .track-title b { font-size: 17px; letter-spacing: -.035em; font-weight: 700; }
+    .track-title span { grid-column: 2; margin-top: 5px; color: #848996; font-size: 11px; }
+    .track-progress { align-self: start; padding-top: 2px; color: #aab0bc; font: 500 10px/1.3 "DM Mono", ui-monospace, monospace; }
+    .track-body { padding: 0 0 28px 152px; }
+    .task-list { border-top-color: rgba(255,255,255,.1); }
+    .task { grid-template-columns: 20px minmax(0,1fr) minmax(190px,.65fr); gap: 16px; padding: 16px 0; border-bottom-color: rgba(255,255,255,.075); }
+    .task input { width: 16px; height: 16px; margin-top: 1px; border-color: rgba(255,255,255,.36); border-radius: 50%; }
+    .task input:checked { border-color: var(--lime); background: var(--lime); }
+    .task input:checked::after { border-color: #0b1011; }
+    .task-copy { gap: 5px; }
+    .task-copy b { color: #e8eaf0; font-size: 13px; font-weight: 700; }
+    .task-copy span { color: #858a98; font-size: 11px; line-height: 1.55; }
+    .task-tag { align-self: center; justify-self: start; margin: 0; padding: 0; color: #a9adba; border: 0; border-radius: 0; font: 500 9px/1.5 "DM Mono", ui-monospace, monospace; letter-spacing: .035em; text-transform: none; white-space: normal; }
+    .empty { border-color: rgba(255,255,255,.22); border-radius: 0; background: rgba(255,255,255,.02); }
+
+    .roadmap { grid-template-columns: minmax(0, 1.3fr) minmax(270px, .7fr); gap: 50px; }
+    .plan { padding: 0; }
+    .phase { grid-template-columns: 100px minmax(0,1fr) auto; gap: 20px; padding: 19px 0; border-bottom-color: rgba(255,255,255,.1); }
+    .phase small { color: var(--lime); font: 500 9px/1.35 "DM Mono", ui-monospace, monospace; letter-spacing: .09em; }
+    .phase b { font-size: 14px; font-weight: 700; }
+    .phase span { color: #838895; font-size: 11px; line-height: 1.5; }
+    .phase em { color: #aeb3c0; font: 500 9px/1.25 "DM Mono", ui-monospace, monospace; }
+    .design-card { align-self: start; padding: 25px 0 25px 28px; border-left: 1px solid rgba(185,246,211,.42); background: transparent; }
+    .design-card h3 { font-size: 24px; line-height: 1.04; letter-spacing: -.055em; }
+    .design-card p { color: #979ca9; font-size: 12px; line-height: 1.65; }
+    .design-card .rule { color: var(--lime); border-top-color: rgba(255,255,255,.1); }
+
+    .research-layout { grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 52px; }
+    .evidence, .gap-panel { padding: 0; }
+    .evidence h3, .gap-panel h3 { font-size: 25px; line-height: 1.08; letter-spacing: -.055em; }
+    .evidence-list { margin-top: 26px; }
+    .evidence-item { padding: 18px 0; border-top-color: rgba(255,255,255,.1); }
+    .evidence-item b { font-size: 13px; font-weight: 700; }
+    .evidence-item p { color: #8d929e; font-size: 12px; line-height: 1.62; }
+    .gap-panel { padding-left: 29px; border-left: 1px solid rgba(255,255,255,.12); }
+    .gap-block { padding: 18px 0; border-top-color: rgba(255,255,255,.1); }
+    .gap-block b { color: var(--lime); font-size: 11px; }
+    .gap-block p { color: #8d929e; font-size: 11px; line-height: 1.6; }
+    .sources { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; margin-top: 44px; border-top: 1px solid rgba(255,255,255,.11); border-left: 1px solid rgba(255,255,255,.11); }
+    .source { min-height: 154px; padding: 18px; border: 0; border-right: 1px solid rgba(255,255,255,.11); border-bottom: 1px solid rgba(255,255,255,.11); border-radius: 0; background: transparent; }
+    .source:hover, .source:focus-visible { transform: none; border-color: rgba(185,246,211,.45); background: rgba(185,246,211,.05); }
+    .source small { color: #858a97; font: 500 8px/1.3 "DM Mono", ui-monospace, monospace; }
+    .source b { font-size: 14px; font-weight: 700; }
+    .source span { color: #858a97; font-size: 10px; line-height: 1.5; }
+
+    .coverage-note, .hiring-gate, .capstone { border: 1px solid rgba(255,255,255,.12); border-radius: 2px; background: linear-gradient(125deg, rgba(25,26,36,.84), rgba(14,15,20,.96)); box-shadow: none; }
+    .coverage-note { padding: 30px; gap: 48px; }
+    .coverage-note h3 { font-size: 25px; line-height: 1.08; letter-spacing: -.055em; }
+    .coverage-note p { color: #9499a5; font-size: 12px; line-height: 1.65; }
+    .coverage-scale div { grid-template-columns: 95px minmax(0,1fr); }
+    .coverage-scale b { color: var(--lime); font: 500 9px/1.3 "DM Mono", ui-monospace, monospace; }
+    .coverage-scale span { color: #9297a4; font-size: 11px; }
+    .atlas-grid { gap: 0; margin-top: 0; border-left: 1px solid rgba(255,255,255,.1); border-top: 1px solid rgba(255,255,255,.1); }
+    .stack-card { padding: 27px; border: 0; border-right: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); border-radius: 0; background: transparent; box-shadow: none; }
+    .stack-card h3 { font-size: 20px; letter-spacing: -.05em; }
+    .stack-card > p { color: #858a97; }
+    .stack-rows { border-top-color: rgba(255,255,255,.1); }
+    .stack-row { border-bottom-color: rgba(255,255,255,.08); }
+    .stack-row b { color: var(--lime); font: 500 8px/1.3 "DM Mono", ui-monospace, monospace; }
+    .stack-row span { color: #969ba7; font-size: 11px; }
+
+    .hiring-gate { padding: clamp(34px, 5vw, 64px); background: linear-gradient(129deg, rgba(26,27,39,.95), rgba(18,15,30,.96)); }
+    .gate-head h2 { max-width: 720px; }
+    .gate-head p { color: #a9aeba; font-size: 13px; line-height: 1.68; }
+    .gate-head strong { color: var(--lime); }
+    .ready-grid { gap: 0; margin-top: 38px; border-top: 1px solid rgba(255,255,255,.12); border-left: 1px solid rgba(255,255,255,.12); }
+    .ready-card { padding: 20px; border: 0; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); border-radius: 0; background: transparent; }
+    .ready-card b { font-size: 13px; font-weight: 700; }
+    .ready-card span { color: #8e939f; font-size: 11px; line-height: 1.6; }
+    .capstone { padding: clamp(34px, 5vw, 64px); background: linear-gradient(120deg, rgba(15,28,31,.95), rgba(20,18,35,.96)); }
+    .capstone::after { border-color: rgba(185,246,211,.18); box-shadow: 0 0 0 36px rgba(185,246,211,.025), 0 0 0 72px rgba(137,116,255,.026); }
+    .capstone h2 { font-size: clamp(37px, 4.5vw, 64px); }
+    .capstone p { color: #adb2bf; font-size: 13px; line-height: 1.68; }
+    .deliverables { border-radius: 0; background: rgba(255,255,255,.1); }
+    .deliverable { padding: 15px 16px; background: rgba(12,14,18,.72); }
+    .deliverable b { font-size: 12px; }
+    .deliverable span { color: #858a97; font-size: 10px; line-height: 1.5; }
+    footer { margin-top: 90px; padding-top: 20px; border-top-color: rgba(255,255,255,.1); color: #707582; font: 500 9px/1.5 "DM Mono", ui-monospace, monospace; letter-spacing: .025em; }
+
+    @media (max-width: 960px) {
+      .shell { grid-template-columns: 1fr; }
+      .rail { padding: 16px 20px; border-right: 0; border-bottom-color: rgba(255,255,255,.1); background: rgba(9,10,14,.93); }
+      .rail nav { padding-top: 0; }
+      .rail nav::before { display: none; }
+      .rail nav a { padding: 7px 9px 7px 15px; }
+      main { padding: 24px 24px 80px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 42px; }
+      .positioning { max-width: 410px; }
+      .roadmap, .research-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      main { padding: 19px 18px 64px; }
+      .topbar { margin-bottom: 25px; }
+      .hero { min-height: auto; padding: 30px 24px; }
+      .hero-grid { gap: 38px; }
+      h1 { font-size: clamp(48px, 16vw, 68px); }
+      .hero-copy { font-size: 14px; }
+      .hero-actions { margin-top: 23px; gap: 16px; }
+      .positioning { padding-left: 19px; }
+      .metrics { width: 100%; display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 38px; }
+      .metric { min-width: 0; padding: 0 12px; }
+      .metric:first-child { padding-left: 0; }
+      .metric b { font-size: 20px; }
+      .metric span { font-size: 8px; }
+      .section { margin-top: 72px; }
+      .section-head { margin-bottom: 24px; }
+      h2 { font-size: 36px; }
+      .start-grid { display: block; }
+      .focus-card { padding: 25px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .direction { padding: 25px 0; }
+      .toolbar { grid-template-columns: 1fr; gap: 8px; }
+      .filter-row { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+      .filter { white-space: nowrap; }
+      .track-head { padding: 19px 0; }
+      .track-title { grid-template-columns: 1fr; gap: 5px; }
+      .track-title small, .track-title span { grid-column: 1; grid-row: auto; }
+      .track-body { padding-left: 0; }
+      .task { grid-template-columns: 19px minmax(0,1fr); gap: 12px; }
+      .task-tag { grid-column: 2; }
+      .roadmap, .research-layout { gap: 30px; }
+      .design-card, .gap-panel { padding-left: 20px; }
+      .sources { grid-template-columns: 1fr; }
+      .coverage-note, .hiring-gate, .capstone { padding: 28px 22px; }
+      .atlas-grid { grid-template-columns: 1fr; }
+      .ready-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-label="Fieldbook navigation">
+      <div class="wordmark">
+        <strong>FDE / FIELDWORK</strong>
+        <span>Deployment curriculum</span>
+      </div>
+      <nav>
+        <a href="#start" class="active">Start here</a>
+        <a href="#checklist">Checklist</a>
+        <a href="#roadmap">40-week path</a>
+        <a href="#research">Research scan</a>
+        <a href="#atlas">Stack atlas</a>
+        <a href="#hiring-gate">Hiring gate</a>
+        <a href="#capstone">Capstone proof</a>
+      </nav>
+      <div class="rail-bottom">
+        <b>Made for deployment work</b>
+        <p>Your progress is saved privately in this browser.</p>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <p>Research-backed preparation for engineers who deliver inside real customer constraints.</p>
+        <p class="date">Fieldbook / 2026</p>
+      </div>
+
+      <section class="hero" id="start">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Forward deployed engineer</p>
+            <h1>Make the<br>deployment real.</h1>
+            <p class="hero-copy">A field guide for becoming the engineer who can <strong>find the costly problem, design the smallest credible system, ship it safely, and earn adoption.</strong> Built from current FDE role signals, systems courses, and applied AI programs.</p>
+            <div class="hero-actions"><a class="hero-cta" href="#checklist">Start the capability map</a><a class="hero-link" href="#roadmap">See the 40-week sequence</a></div>
+          </div>
+          <aside class="positioning">
+            <p class="label">The FDE operating loop</p>
+            <p class="title">Diagnose.<br>Build.<br>Embed.</p>
+            <div class="role-loop"><span>01 &nbsp; Discover the work</span><span>02 &nbsp; Engineer the proof</span><span>03 &nbsp; Drive adoption</span></div>
+            <p class="note">Not a framework specialty. End-to-end technical ownership under customer, business, and production constraints.</p>
+          </aside>
+        </div>
+        <div class="metrics" aria-label="Checklist progress">
+          <div class="metric"><b id="completion-count">0 / 90</b><span>capability evidence</span></div>
+          <div class="metric"><b id="completion-rate">0%</b><span>readiness built</span></div>
+          <div class="metric"><b>100+</b><span>tools, frameworks &amp; systems mapped</span></div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="today-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Begin without drift</p><h2 id="today-title">Your next three moves</h2></div>
+          <p>Start with a small, real vertical slice. An FDE earns trust by making a useful thing work in the constraints that actually exist.</p>
+        </div>
+        <div class="start-grid">
+          <div class="card focus-card">
+            <p class="card-label">Continue from where you are</p>
+            <h3 id="focus-title">Start with the engineering baseline</h3>
+            <div class="next-list" id="next-list" aria-live="polite"></div>
+          </div>
+          <aside class="card direction">
+            <p class="card-label">Operating rule</p>
+            <h3>Learn in production-shaped loops.</h3>
+            <p>Every lane has a proof artifact. Do not study a tool until it makes a user workflow clearer, safer, faster, cheaper, or more reliable.</p>
+            <button class="text-button" id="reset-progress" type="button">Reset saved progress</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="checklist" aria-labelledby="checklist-title">
+        <div class="section-head">
+          <div><p class="eyebrow">The field checklist</p><h2 id="checklist-title">What you need to be able to do</h2></div>
+          <p>90 capabilities arranged in the order they connect in actual deployments. Search a skill, or filter the lane you are working on.</p>
+        </div>
+        <div class="toolbar">
+          <label class="search-wrap" for="search"><input id="search" type="search" autocomplete="off" aria-label="Search the FDE capability map" placeholder="Search skills, systems, frameworks, or proof…"></label>
+          <div class="filter-row" role="group" aria-label="Filter checklist">
+            <button class="filter selected" data-filter="all" type="button">All lanes</button>
+            <button class="filter" data-filter="build" type="button">Build</button>
+            <button class="filter" data-filter="ai" type="button">AI systems</button>
+            <button class="filter" data-filter="delivery" type="button">Delivery</button>
+            <button class="filter" data-filter="proof" type="button">Proof</button>
+          </div>
+        </div>
+        <p class="tool-note" id="result-note">Showing all 13 learning lanes.</p>
+        <div class="track-list" id="track-list"></div>
+        <div class="empty" id="empty">No checklist items match that search yet. Try a framework, skill, or project word.</div>
+      </section>
+
+      <section class="section" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Sequenced, not scattered</p><h2 id="roadmap-title">A 40-week deployment path</h2></div>
+          <p>The sequence now follows the role signal: discovery and production-grade backend/data first; a thin interface only when it helps a customer use the system.</p>
+        </div>
+        <div class="roadmap">
+          <div class="card plan">
+            <div class="phase"><small>Weeks 01–04</small><div><b>FDE operating baseline</b><span>Customer workflow framing, Python, Git, SQL, HTTP, tests and a thin backend vertical slice.</span></div><em>Foundation</em></div>
+            <div class="phase"><small>Weeks 05–08</small><div><b>Build the integration core</b><span>FastAPI, PostgreSQL, auth, API contracts, client data, rate limits and deployment basics.</span></div><em>Backend</em></div>
+            <div class="phase"><small>Weeks 09–13</small><div><b>Engineer the AI decision</b><span>Hosted versus open weights, private inference, structured outputs, synthetic data, context and evaluation.</span></div><em>Applied AI</em></div>
+            <div class="phase"><small>Weeks 14–18</small><div><b>Retrieval and agent workflows</b><span>RAG selection, graph and multimodal options, tools, MCP, memory, durable execution and agent simulation.</span></div><em>Automation</em></div>
+            <div class="phase"><small>Weeks 19–25</small><div><b>Production and adversaries</b><span>System design, cloud, observability, guardrails, red-teaming, security, resilience and cost.</span></div><em>Systems</em></div>
+            <div class="phase"><small>Weeks 26–31</small><div><b>Run the customer engagement</b><span>Discovery, requirements, ROI, technical narrative, scope, risk, stakeholder trust and a focused demo.</span></div><em>FDE core</em></div>
+            <div class="phase"><small>Weeks 32–36</small><div><b>Drive adoption and handoff</b><span>Training, feedback loops, runbooks, service levels, champions and field-to-product feedback.</span></div><em>Delivery</em></div>
+            <div class="phase"><small>Weeks 37–40</small><div><b>Pass the evidence gate</b><span>End-to-end client deployment, measured result, live design defense, case practice and tailored applications.</span></div><em>Launch</em></div>
+          </div>
+          <aside class="card design-card">
+            <p class="card-label">The test of every phase</p>
+            <h3>Can a skeptical customer use the evidence to make a decision?</h3>
+            <p>Software skill is necessary. FDE readiness comes from translating uncertainty into a scoped plan, a safe system, a compelling demonstration, and an adoption path.</p>
+            <p class="rule">Default to one sturdy workflow with a clear evaluation before building an autonomous agent or complex platform.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="research" aria-labelledby="research-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Deep research scan</p><h2 id="research-title">What exists. What is still missing.</h2></div>
+          <p>There is no single elite "FDE degree." The strongest preparation is a deliberately assembled intersection of software, ML systems, human-centered product work, and client delivery.</p>
+        </div>
+        <div class="research-layout">
+          <article class="card evidence">
+            <p class="card-label">Convergent signals across roles and curricula</p>
+            <h3>The FDE competency model</h3>
+            <div class="evidence-list">
+              <div class="evidence-item"><b>Current FDE postings ask for end-to-end ownership.</b><p>OpenAI emphasizes discovery, scoping, system design, build, rollout, adoption, and field feedback. Scale emphasizes Python or TypeScript, robust backend/data integrations, cloud, containers, Linux, networking and customer delivery.</p></div>
+              <div class="evidence-item"><b>A React-first curriculum is not the role signal.</b><p>Some FDE jobs are full-stack and React can be a bonus or a client-stack requirement; it is not a universal FDE core. The durable skill is a thin, trustworthy operational interface or a precise integration contract—not marketing-site frontend work.</p></div>
+              <div class="evidence-item"><b>Top systems courses prioritize reliability over notebook fluency.</b><p>Stanford's ML systems path includes data, deployment, monitoring, privacy, fairness, security, and the human side of ML. MIT teaches fault tolerance, replication, and consistency. CMU goes deep on data systems and recovery.</p></div>
+              <div class="evidence-item"><b>The bootcamp scans strengthen several core modules.</b><p>Your materials emphasize local and open-weight inference, synthetic data, retrieval selection, evals, guardrails, agent memory, harness engineering, fine-tuning and voice. Those are now explicit in this fieldbook, placed after backend/data foundations and before production delivery.</p></div>
+              <div class="evidence-item"><b>Adjacent titles matter.</b><p>Anthropic commonly uses Applied AI Engineer or Architect; Palantir uses Forward Deployed Software Engineer. Search by the work—customer-facing technical delivery—not only the title.</p></div>
+            </div>
+          </article>
+          <aside class="card gap-panel">
+            <p class="card-label">Curriculum decision</p>
+            <h3>Spend your time where hiring signals overlap.</h3>
+            <div class="gap-block"><b>Prioritize</b><p>Full-stack product craft, API and data integration, systems trade-offs, evals, security, concise writing, discovery, business cases, adoption.</p></div>
+            <div class="gap-block"><b>Learn, then use selectively</b><p>RAG, agents, vector search, workflow orchestration, Kubernetes, fine-tuning, GraphRAG. They are tools, not the role.</p></div>
+            <div class="gap-block"><b>Do not confuse with readiness</b><p>Framework collecting, prompt tricks, multi-agent demos, and algorithm drills without an operating or customer context.</p></div>
+          </aside>
+        </div>
+        <div class="sources" aria-label="Research sources">
+          <a class="source" href="https://openai.com/careers/forward-deployed-engineer-%28fde%29-seattle-seattle/" target="_blank" rel="noreferrer"><small>Current role signal</small><b>OpenAI FDE</b><span>Discovery through production rollout, adoption, measurable impact.</span></a>
+          <a class="source" href="https://openai.com/careers/forward-deployed-software-engineer-sf-san-francisco/" target="_blank" rel="noreferrer"><small>Current role signal</small><b>OpenAI FD Software Engineer</b><span>Customer-side architecture, scalable software, scopes and production deployments.</span></a>
+          <a class="source" href="https://scale.com/careers/4593571005" target="_blank" rel="noreferrer"><small>Current role signal</small><b>Scale FDE, GenAI</b><span>Customer delivery, engineering, data, distributed systems, cloud.</span></a>
+          <a class="source" href="https://scale.com/careers/4481921005" target="_blank" rel="noreferrer"><small>Current role signal</small><b>Scale FD Software Engineer</b><span>Python, backend/data integration, cloud, Linux, networking and customer adoption.</span></a>
+          <a class="source" href="https://www.palantir.com/careers/students-and-early-talent/" target="_blank" rel="noreferrer"><small>Role lineage</small><b>Palantir FDSE</b><span>Technical and operational outcomes for customers.</span></a>
+          <a class="source" href="https://www.anthropic.com/careers/jobs?lang=us" target="_blank" rel="noreferrer"><small>Adjacent title map</small><b>Anthropic Applied AI</b><span>Applied engineers and architects are the closest role family.</span></a>
+          <a class="source" href="https://stanford-cs329s.github.io/syllabus.html" target="_blank" rel="noreferrer"><small>University systems</small><b>Stanford CS 329S</b><span>Production ML, deployment, monitoring, governance, business.</span></a>
+          <a class="source" href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noreferrer"><small>University systems</small><b>MIT 6.5840</b><span>Fault tolerance, replication, consistency, distributed reasoning.</span></a>
+          <a class="source" href="https://15445.courses.cs.cmu.edu/spring2026/" target="_blank" rel="noreferrer"><small>University data</small><b>CMU 15-445/645</b><span>Data models, indexes, transactions, recovery, distributed databases.</span></a>
+          <a class="source" href="https://github.com/the-full-stack/the-full-stack-website/blob/main/docs/llm-bootcamp/index.md" target="_blank" rel="noreferrer"><small>Hands-on academy</small><b>Full Stack Deep Learning</b><span>Prompts, LLMOps, language UX, augmentation, rapid launch.</span></a>
+          <a class="source" href="https://www.deeplearning.ai/courses/retrieval-augmented-generation" target="_blank" rel="noreferrer"><small>Hands-on academy</small><b>DeepLearning.AI RAG</b><span>Retrieval, hybrid search, evaluation, deployment, trade-offs.</span></a>
+          <a class="source" href="https://modelcontextprotocol.io/specification/2024-11-05/index" target="_blank" rel="noreferrer"><small>Protocol</small><b>Model Context Protocol</b><span>Tool and data integration needs explicit capability and security design.</span></a>
+          <a class="source" href="https://a2a-protocol.org/latest/" target="_blank" rel="noreferrer"><small>Protocol</small><b>Agent2Agent</b><span>Interoperability for independent agentic applications.</span></a>
+          <a class="source" href="https://opentelemetry.io/docs/" target="_blank" rel="noreferrer"><small>Production standard</small><b>OpenTelemetry</b><span>Vendor-neutral traces, metrics and logs for observable systems.</span></a>
+          <a class="source" href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noreferrer"><small>Security baseline</small><b>OWASP GenAI Top 10</b><span>Current risks and mitigations for LLM and GenAI applications.</span></a>
+        </div>
+      </section>
+
+      <section class="section" id="atlas" aria-labelledby="atlas-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Framework and library atlas</p><h2 id="atlas-title">The complete working stack</h2></div>
+          <p>This is the selection map for the tools you will encounter. It is intentionally broad, but it tells you what to master, what to choose between, and what to recognize in a customer environment.</p>
+        </div>
+        <div class="coverage-note">
+          <div>
+            <p class="card-label">Coverage rule</p>
+            <h3>Master the <strong>capability</strong>; choose the framework for the constraint.</h3>
+            <p>You do not become FDE-ready by memorizing every package. You become ready when you can select a small, compatible stack, explain the trade-offs, integrate it safely, and leave a client with an operable system. The atlas covers the modern FDE surface area so no major layer is invisible.</p>
+          </div>
+          <div class="coverage-scale" aria-label="How to use the stack atlas">
+            <div><b>Build deep</b><span>Use routinely, debug independently, and prove in a shipped project.</span></div>
+            <div><b>Select well</b><span>Know decision criteria and use one representative tool end to end.</span></div>
+            <div><b>Recognize</b><span>Understand purpose, risks, integration points, and when to bring a specialist.</span></div>
+          </div>
+        </div>
+        <div class="atlas-grid">
+          <article class="stack-card"><p class="card-label">01 · Core engineering</p><h3>Foundations and quality</h3><p>The non-negotiable baseline for every client environment.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Python, TypeScript, SQL, Bash, Git, Linux, HTTP, JSON, networking, concurrency and debugging.</span></div><div class="stack-row"><b>Select well</b><span>uv or Poetry, npm or pnpm, Ruff or Black, ESLint, Prettier, Make, Docker dev environments.</span></div><div class="stack-row"><b>Verify with</b><span>pytest, Vitest or Jest, Playwright, Testcontainers, k6 or Locust, Postman or Bruno.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">02 · Delivery surface</p><h3>Operational interfaces and demos</h3><p>FDEs make workflows usable. They do not need to become dedicated frontend engineers.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Gradio, Streamlit, notebooks, CLI workflows, basic HTML/CSS and trustworthy states for operators.</span></div><div class="stack-row"><b>Select well</b><span>Existing customer UI, low-code tools or a small custom interface; use React or Next.js only when the integration needs it.</span></div><div class="stack-row"><b>AI delivery</b><span>Server-Sent Events, WebSockets, citations, review states, recovery paths and Sentry; explain the contract to the client UI team.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">03 · Services</p><h3>Backend, APIs and contracts</h3><p>Expose capabilities that an enterprise can reliably call and govern.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>FastAPI, Pydantic, SQLAlchemy, Alembic, REST, OpenAPI, auth, background processing and error design.</span></div><div class="stack-row"><b>Select well</b><span>Express or NestJS, GraphQL, gRPC, Uvicorn, Nginx, API gateways, webhooks, SSE and WebSockets.</span></div><div class="stack-row"><b>Durable work</b><span>Celery, RQ, Dramatiq, Temporal and Inngest; choose from execution guarantees, not fashion.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">04 · Information plane</p><h3>Data, integration and analytics</h3><p>Most FDE work succeeds or fails at the seams between systems.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>PostgreSQL, Redis, schema design, migrations, query plans, data quality and source-of-truth decisions.</span></div><div class="stack-row"><b>Select well</b><span>MongoDB, DuckDB, S3 or GCS or Blob Storage, Kafka or Redpanda, webhooks, ETL and CDC.</span></div><div class="stack-row"><b>At scale</b><span>dbt, Airbyte or Fivetran, Spark, Databricks, Airflow, Prefect, Dagster and lakehouse governance.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">05 · Model plane</p><h3>LLMs, routing and serving</h3><p>Choose models from requirements, observed quality, cost and data boundaries.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>OpenAI, Anthropic, Gemini APIs; prompting, structured output, tool calling, context limits and model evaluation.</span></div><div class="stack-row"><b>Select well</b><span>Amazon Bedrock, Azure OpenAI, Google Vertex AI, LiteLLM, model routing, batching and caching.</span></div><div class="stack-row"><b>Private serving</b><span>Ollama, vLLM, Hugging Face TGI, quantization, GPU capacity, latency and privacy trade-offs.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">06 · Knowledge plane</p><h3>RAG and document intelligence</h3><p>Ground model output in authorized evidence with proof of retrieval quality.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Chunking, metadata, ACL-aware retrieval, citations, hybrid search, reranking, abstention and RAG evaluation.</span></div><div class="stack-row"><b>Select well</b><span>LangChain, LlamaIndex, Haystack, Unstructured, Docling, Apache Tika, OCR and document parsing.</span></div><div class="stack-row"><b>Vector layer</b><span>pgvector, Qdrant, Pinecone, Weaviate, Milvus, FAISS; embedding and reranking model families.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">07 · Agent plane</p><h3>Agents, workflows and protocols</h3><p>Favor controlled stateful workflows; add autonomy only where it earns its cost.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Tool schemas, state machines, checkpoints, approvals, retries, budgets, permissions and human escalation.</span></div><div class="stack-row"><b>Select well</b><span>OpenAI Agents SDK, LangGraph, PydanticAI, Semantic Kernel, AutoGen and CrewAI.</span></div><div class="stack-row"><b>Interoperate</b><span>MCP servers and clients, A2A, OAuth for tools, Temporal or Inngest, event-driven workflow patterns.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">08 · Evidence plane</p><h3>Evals, tracing and operations</h3><p>Make quality, cost and failures observable before rollout.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Task datasets, scoring rubrics, regression testing, error taxonomies, release gates and outcome metrics.</span></div><div class="stack-row"><b>Select well</b><span>Ragas, DeepEval, Promptfoo, Braintrust, OpenAI Evals, LangSmith, Langfuse and Phoenix.</span></div><div class="stack-row"><b>Operate with</b><span>OpenTelemetry, Prometheus, Grafana, Sentry, Datadog, logs, traces, metrics, alerts and runbooks.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">09 · Production guardrails</p><h3>Cloud, security and compliance</h3><p>Design for enterprise trust, not merely a successful demo.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Docker, Compose, IAM, secrets, OAuth2, OIDC, JWT, RBAC, threat modeling and data residency.</span></div><div class="stack-row"><b>Select well</b><span>Kubernetes, Helm, Terraform or OpenTofu, Pulumi, GitHub Actions, Argo CD, Cloud Run, ECS and Azure Container Apps.</span></div><div class="stack-row"><b>Harden with</b><span>SAML, SCIM, Vault or OpenBao, OPA, Presidio, Semgrep, dependency scanning, SOC 2 and OWASP GenAI Top 10.</span></div></div></article>
+          <article class="stack-card"><p class="card-label">10 · Customer plane</p><h3>Discovery, business and adoption</h3><p>The part no library can replace—and the reason a deployment survives.</p><div class="stack-rows"><div class="stack-row"><b>Build deep</b><span>Discovery interviews, active listening, stakeholder maps, requirements, system storytelling, demos and concise written updates.</span></div><div class="stack-row"><b>Select well</b><span>MECE, 5 Whys, jobs-to-be-done, RICE, MoSCoW, architecture decision records, risk registers and SOWs.</span></div><div class="stack-row"><b>Drive adoption</b><span>ROI and KPI models, training, champions, feedback loops, Notion, Linear or Jira, Slack, Loom, Miro, Figma and 30/60/90-day plans.</span></div></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="hiring-gate" aria-labelledby="hiring-title">
+        <div class="hiring-gate">
+          <div class="gate-head">
+            <div>
+              <p class="eyebrow">Hiring readiness standard</p>
+              <h2 id="hiring-title">A curriculum can create evidence. It cannot guarantee an offer.</h2>
+            </div>
+            <p>Hiring depends on the market, location, work authorization, interview performance and the role’s seniority. This fieldbook therefore uses a <strong>hard evidence gate</strong>: complete it only when your work shows the judgment and technical delivery the role needs—not merely when every lesson is watched.</p>
+          </div>
+          <div class="ready-grid">
+            <div class="ready-card"><b>Three deployment proofs</b><span>Three scoped customer-style systems with a backend, data integration, evals, security posture and an adoption plan.</span></div>
+            <div class="ready-card"><b>One deep capstone</b><span>A live deployment with a discovery document, ROI or KPI, system design, red-team report, traces and an operator handoff.</span></div>
+            <div class="ready-card"><b>Interview evidence</b><span>Three timed ambiguous cases, five ownership stories, practical Python/SQL/API debugging and a 20-minute design defense.</span></div>
+            <div class="ready-card"><b>Targeted applications</b><span>A portfolio, resume and company thesis tailored to the FDE, FDSE, Applied AI Engineer and AI Deployment Engineer role families.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="capstone" aria-labelledby="capstone-title">
+        <div class="capstone">
+          <div class="capstone-grid">
+            <div>
+              <p class="eyebrow">The portfolio artifact that matters</p>
+              <h2 id="capstone-title">One deployment<br>that survives questions.</h2>
+              <p>Your final project should not be a generic chatbot. Choose a realistic customer workflow with imperfect data, a real decision-maker, operational constraints, measurable success, a safe rollout plan, and a crisp narrative of what you would improve next.</p>
+            </div>
+            <div class="deliverables">
+              <div class="deliverable"><b>Discovery and business case</b><span>Problem, stakeholders, baseline, KPI, ROI, scope, risks.</span></div>
+              <div class="deliverable"><b>Deployed product</b><span>Usable frontend, API, data integration, auth and a real workflow.</span></div>
+              <div class="deliverable"><b>Evaluation and safety brief</b><span>Test set, observed failure modes, red-team results, acceptance criteria.</span></div>
+              <div class="deliverable"><b>Operations and adoption plan</b><span>Tracing, alerts, runbook, training, handoff, 30/60/90-day plan.</span></div>
+              <div class="deliverable"><b>Live design defense</b><span>Five-minute demo, system design, trade-offs, customer Q&amp;A.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>FDE Fieldbook 2026. Research scan completed 18 August 2026. Sources are linked above for direct inspection.</p>
+        <p>Built from the supplied FDE curriculum and current primary-source role and course materials.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const tracks = [
+      { id: 'foundation', tag: 'build', label: 'Build lane', title: 'Engineering foundations', summary: 'Write dependable code before adding AI complexity.', tasks: [
+        ['Advanced Python for production', 'Types, errors, async, virtual environments, pytest and readable module boundaries.', 'Build a CSV to PostgreSQL ingestion service with tests.'],
+        ['Integration-language fluency', 'Python is primary. Read TypeScript or JavaScript well enough to integrate with client services, scripts and existing applications.', 'Modify a typed integration without needing to own a frontend product.'],
+        ['SQL that explains the business', 'Joins, CTEs, windows, indexes, query plans and transaction basics.', 'Answer five operations questions from a messy relational dataset.'],
+        ['Git and delivery hygiene', 'Small branches, reviews, commits, issue context and a release checklist.', 'Open a clean pull request with tests and a rollback note.'],
+        ['HTTP and failure semantics', 'Methods, status codes, retries, idempotency, timeouts, headers and pagination.', 'Document a resilient API client contract.'],
+        ['Testing the important paths', 'Unit, integration and end-to-end tests; know what not to mock.', 'Write an executable acceptance test for a customer workflow.']
+      ]},
+      { id: 'interface', tag: 'build', label: 'Delivery lane', title: 'Operational interface and client workflow', summary: 'Make the system usable without turning the curriculum into a frontend-engineering program.', tasks: [
+        ['Thin delivery interface', 'Use Gradio, Streamlit, a notebook, CLI or the customer’s existing UI to make one workflow usable.', 'Demo the workflow end to end without building a marketing website.'],
+        ['Workflow states and trust', 'Design loading, error, retry, permission, confidence, source and escalation states before the happy path.', 'Make a failed or uncertain outcome explain the safe next action.'],
+        ['Streaming and evidence UX', 'Show partial work, citations, cancel, review and recovery only where the user benefits.', 'Expose grounded output and a clear human-review point.'],
+        ['Operational information design', 'Turn data, uncertainty, cost and system status into one decision a busy operator can act on.', 'Create a simple operator view for a live customer workflow.'],
+        ['Client extension literacy', 'Recognize React, Next.js and TypeScript when the customer stack requires an integration; they are optional, not a core gate.', 'Extend an existing UI or hand a precise contract to the client frontend team.'],
+        ['User feedback instrumentation', 'Capture friction, task completion, corrections and context that improve the next iteration.', 'Add one feedback route that reaches a product backlog.']
+      ]},
+      { id: 'backend', tag: 'build', label: 'Build lane', title: 'Backend, APIs and identity', summary: 'Expose reliable capabilities that customers can safely integrate.', tasks: [
+        ['Clean architecture and FastAPI services', 'Use FastAPI or another stack; separate transport, domain logic, data access and infrastructure.', 'Implement a small service with a clean application boundary.'],
+        ['Contracts and validation', 'Use Pydantic, Zod or equivalent schemas for inputs, outputs and model responses.', 'Reject bad requests with helpful, documented errors.'],
+        ['REST APIs and API documentation', 'Use REST conventions, versioning, pagination, filtering, idempotency keys, Swagger/OpenAPI and backwards compatibility.', 'Publish a client-ready API reference plus example request.'],
+        ['Identity and access', 'JWT, OAuth2, OIDC, RBAC, tenancy and the basics of SAML and SCIM.', 'Protect a multi-tenant endpoint and verify cross-tenant isolation.'],
+        ['Background work', 'Queues, workers, retries, dead-letter paths and durable execution for slow operations.', 'Make an interrupted long-running job resume safely.'],
+        ['Realtime delivery', 'Use SSE or WebSockets when the user benefits from live progress.', 'Expose status progress for a document processing workflow.'],
+        ['Abuse and reliability controls', 'Rate limits, payload limits, timeouts, retries, CORS and secret handling.', 'Write a short threat and failure model for your API.']
+      ]},
+      { id: 'data', tag: 'build', label: 'Build lane', title: 'Data and enterprise integration', summary: 'Fit inside the customer environment instead of requiring a clean-room demo.', tasks: [
+        ['Data modeling and MongoDB choices', 'Choose relational, document stores such as MongoDB, cache and graph stores based on access patterns and ownership.', 'Defend a schema for a workflow with audit history.'],
+        ['PostgreSQL, Redis and query optimization', 'Model core data in Postgres; cache carefully; know invalidation, connection pooling, indexes and query plans.', 'Improve one slow endpoint using query evidence, not instinct.'],
+        ['Ingestion pipelines', 'Validate, normalize, deduplicate, track provenance and handle malformed source data.', 'Ingest PDFs, CSVs and API records with an error report.'],
+        ['Enterprise data at scale', 'Know when PySpark, Databricks, Delta Lake, lakehouse governance and Unity Catalog are required.', 'Choose a batch or distributed data design from volume, governance and latency constraints.'],
+        ['Integration design', 'Webhooks, polling, connectors, source-of-truth decisions and partial failure handling.', 'Integrate one third-party service with retries and a reconciliation job.'],
+        ['Data governance', 'Classify sensitive fields, retention, residency, access logs and deletion expectations.', 'Produce a data-flow diagram that identifies sensitive data.'],
+        ['Data quality monitoring', 'Freshness, completeness, schema drift and business validity checks.', 'Alert when a key upstream feed stops being trustworthy.']
+      ]},
+      { id: 'systems', tag: 'build', label: 'Build lane', title: 'Enterprise system design and reliability', summary: 'Make explicit trade-offs when the system gets real.', tasks: [
+        ['Requirements gathering before architecture', 'Clarify users, workflow, constraints, SLOs, data boundaries and what failure costs.', 'Turn an ambiguous ask into a one-page design brief.'],
+        ['Latency, cost optimization and quality budgets', 'Estimate each before choosing a model, database or orchestration pattern.', 'Write a budget table for an AI workflow at expected volume.'],
+        ['Distributed systems primitives', 'Queues, retries, idempotency, leases, consistency, replication and backpressure.', 'Explain the duplicate-request and delayed-worker failure modes.'],
+        ['Caching and graceful degradation', 'Choose what can be cached, what must be fresh and what users see during outages.', 'Add a safe fallback for a failed dependency.'],
+        ['Resilience and incident response', 'Health checks, circuit breakers, runbooks, on-call context and post-incident learning.', 'Run a tabletop incident for an unavailable model provider.'],
+        ['Architecture communication', 'Use diagrams that show trust boundaries, data flow, components and trade-offs.', 'Whiteboard a system in ten minutes for a non-specialist stakeholder.'],
+        ['Load and failure testing', 'Test the limit that matters; measure before assuming scale.', 'Load-test the highest-value route and publish the result.']
+      ]},
+      { id: 'genai', tag: 'ai', label: 'AI systems lane', title: 'GenAI and context engineering', summary: 'Treat a model as a probabilistic component with product constraints.', tasks: [
+        ['LLM foundations and model selection', 'Compare hosted, open and local large language models on quality, latency, price, privacy and deployment fit.', 'Write a decision memo for two real candidate models.'],
+        ['Open-weight and local inference', 'Understand model weights, quantization, local serving, GPU limits, privacy and licensing before recommending an open model.', 'Run a private-inference proof of concept and state its operational trade-offs.'],
+        ['Multimodal and voice fit', 'Understand document, image, video and voice pipelines well enough to choose them only when the workflow benefits.', 'Propose a multimodal or voice design with data, latency, privacy and evaluation constraints.'],
+        ['Prompt engineering and structured outputs', 'Separate system rules, context and user input; use structured output and validation.', 'Return a validated object, not just prose.'],
+        ['Context engineering', 'Budget the window, compress safely, cite source context and prevent instruction collisions.', 'Measure how context size affects task quality and cost.'],
+        ['Synthetic data and backtesting', 'Generate useful synthetic cases safely, label limits clearly and use them to prototype or test a workflow.', 'Create a backtest that separates synthetic signal from production claims.'],
+        ['Function and tool calling', 'Design narrow schemas, validate tool outputs and recover from failures.', 'Build one tool call with safe argument validation.'],
+        ['Memory choices', 'Distinguish session, semantic, episodic and procedural memory; retain only what is justified.', 'Document what memory is stored, why, and when it expires.'],
+        ['Fine-tuning decision', 'Know when prompting, retrieval, workflow design or fine-tuning is the better lever.', 'Make a recommendation using examples, cost and evaluation evidence.'],
+        ['Human-in-the-loop', 'Place review at irreversible, high-risk or low-confidence decisions.', 'Add a review queue that can correct and improve the system.']
+      ]},
+      { id: 'rag', tag: 'ai', label: 'AI systems lane', title: 'Retrieval and knowledge systems', summary: 'Ground answers in the right evidence, with a way to measure it.', tasks: [
+        ['Document understanding', 'Parse layouts, tables, metadata and access controls before embedding text.', 'Create a corpus report showing parse failures and coverage.'],
+        ['Chunking and provenance', 'Choose chunk boundaries, retain source lineage and preserve permissions.', 'Link every generated answer claim back to its origin.'],
+        ['Embeddings, vector and hybrid retrieval', 'Use embeddings, vector search, keyword search, filters, hybrid ranking and rerankers.', 'Compare dense, sparse and hybrid retrieval on a small judged set.'],
+        ['Advanced retrieval selection', 'Know when GraphRAG, multimodal retrieval, contextual retrieval, corrective RAG or agentic search are justified.', 'Select the smallest retrieval design that wins on an evaluation set.'],
+        ['Vector database selection', 'Understand pgvector, Qdrant, Pinecone, Weaviate and FAISS trade-offs.', 'Choose a store from data, operations and access requirements.'],
+        ['RAG evaluation', 'Measure retrieval quality, groundedness, relevance, abstention and end-task success.', 'Build a labeled evaluation set before claiming quality.'],
+        ['Hallucination reduction and answer safety', 'Cite, abstain, escalate and capture missing-information feedback.', 'Ship a no-answer experience that creates a useful next step.']
+      ]},
+      { id: 'agents', tag: 'ai', label: 'AI systems lane', title: 'Agents and workflow automation', summary: 'Use control, state and evaluation before autonomy.', tasks: [
+        ['Agent suitability test', 'Use an agent only for variable, multi-step work where deterministic workflow is insufficient.', 'Write down why a simpler workflow does not solve the task.'],
+        ['Planning and enterprise automation', 'Use explicit plans, state, checkpoints, transitions, retries and time limits to automate business workflows safely.', 'Model a workflow as a state diagram before coding it.'],
+        ['Framework selection', 'Know the practical roles of LangGraph, CrewAI, OpenAI Agents SDK, PydanticAI, Temporal and Inngest.', 'Select one tool from operational needs, not popularity.'],
+        ['Harness and spec-driven delivery', 'Use a written spec, acceptance tests, reusable skills and an evaluation loop to keep long-running agent work controlled.', 'Ship an agent change through a spec, test and trace review.'],
+        ['Tool safety', 'Constrain permissions, validate arguments, apply allowlists and log every external action.', 'Run an adversarial test against a tool-using workflow.'],
+        ['Human approval and handoff', 'Add clear interruption and escalation paths for consequential actions.', 'Demonstrate a reviewer correcting one step and the workflow continuing.'],
+        ['Multi-agent systems, used with restraint', 'Use multiple agents only when role isolation or parallel expertise beats a single controlled flow.', 'Compare the cost and quality of a one-agent and multi-agent design.']
+      ]},
+      { id: 'quality', tag: 'ai', label: 'AI systems lane', title: 'Evals, observability and AI safety', summary: 'Know whether the system works before the customer tells you it does not.', tasks: [
+        ['Evaluation harness', 'Create gold cases, rubrics, pass criteria, regression tests and failure categories.', 'Run a repeatable evaluation in CI or before release.'],
+        ['AI observability and production telemetry', 'Trace requests, retrievals, tool calls, latency, token cost and user outcomes.', 'Use Langfuse, LangSmith, Phoenix or OpenTelemetry to inspect a failure.'],
+        ['Online quality signals', 'Collect task success, correction rate, abstention, feedback and drift indicators.', 'Define one user-centered metric beyond model score.'],
+        ['AI guardrails and prompt injection defenses', 'Treat external content as untrusted; isolate instructions, tools and sensitive data.', 'Red-team your RAG system with hostile documents.'],
+        ['AI security, privacy and compliance', 'Apply least privilege, PII handling, auditability, residency and regulatory requirements.', 'Explain data handling to a security reviewer without hand-waving.'],
+        ['Release and rollback', 'Version prompts, models and datasets; canary, observe, roll back and document change.', 'Recover a bad model release using a tested rollback path.']
+      ]},
+      { id: 'cloud', tag: 'build', label: 'Build lane', title: 'Cloud delivery and platform operations', summary: 'Turn a useful local service into a maintainable customer deployment.', tasks: [
+        ['Docker and Docker Compose', 'Write lean Dockerfiles, use Docker Compose for local dependencies and manage configuration safely.', 'Containerize an app with a repeatable local environment.'],
+        ['Cloud building blocks and deployment', 'Use compute, object storage, managed databases, secrets, network controls and IAM.', 'Deploy an app with a documented environment architecture.'],
+        ['Infrastructure as code', 'Use Terraform or an equivalent to make environments reviewable and repeatable.', 'Provision a disposable environment from code.'],
+        ['CI/CD', 'Automate checks, package builds, migrations, deploys and basic release gates.', 'Deliver one release through a pipeline, not a manual console session.'],
+        ['Observability stack', 'Use metrics, structured logs, traces, dashboards and alerts that lead to action.', 'Create a dashboard for availability, latency, errors and cost.'],
+        ['Security baseline', 'Manage secrets, IAM, network exposure, vulnerability scanning and dependency updates.', 'Perform a pre-release security review on your own service.'],
+        ['Cloud decision trade-offs', 'Compare AWS, Azure, GCP and private options against the customer environment.', 'Recommend a deployment target with a residency and procurement rationale.']
+      ]},
+      { id: 'discovery', tag: 'delivery', label: 'Delivery lane', title: 'Client discovery and communication', summary: 'Find the costly problem before making a technically elegant solution.', tasks: [
+        ['Customer discovery interview', 'Prepare hypotheses, ask open questions, reflect back and surface unstated constraints.', 'Run one 30-minute discovery conversation and write the learnings.'],
+        ['Problem decomposition', 'Restate, clarify, map current state, identify root causes, prioritize and propose an MVP.', 'Convert a vague request into a decision tree and a scoped first release.'],
+        ['Stakeholder interviews and mapping', 'Identify user, buyer, approver, operator, security owner, champion and blocker.', 'Create a stakeholder map with a communication plan.'],
+        ['Enterprise communication and solution architecture', 'Explain confidence, failure modes, cost and trade-offs without hiding important detail.', 'Explain your architecture in sixty seconds to a budget owner.'],
+        ['Written operating updates', 'Use concise status, decisions, risks, asks and next dates.', 'Send a weekly update that another person can act on.'],
+        ['Decision-oriented meetings', 'Use agendas, demos, pre-reads and explicit decision logs.', 'Close a meeting with named owners and next actions.'],
+        ['Business presentation and executive demonstration', 'Lead with the problem, show the workflow and evidence, then discuss technology.', 'Record a five-minute demo that a non-engineer can follow.']
+      ]},
+      { id: 'business', tag: 'delivery', label: 'Delivery lane', title: 'Business value, delivery and adoption', summary: 'Own value realization after the software first works.', tasks: [
+        ['Proposal writing, business case and KPI', 'Model hours saved, errors avoided, revenue, risk, implementation cost, KPI definition and adoption assumptions.', 'Write a one-page business case with explicit sensitivity assumptions.'],
+        ['Scope and sequencing', 'Use a thin vertical slice, acceptance criteria, milestones and a clear non-goals list.', 'Produce a two-week MVP plan and explain what is intentionally excluded.'],
+        ['Build, buy or integrate', 'Compare time-to-value, lock-in, differentiation, maintenance and control.', 'Defend a recommendation for a realistic customer scenario.'],
+        ['Risk management', 'Track technical, organizational, legal, security, dependency and adoption risks.', 'Maintain a risk register with owners and mitigations.'],
+        ['Change management', 'Train users, recruit champions, pace rollout and make feedback safe to give.', 'Create a launch plan for a resistant user group.'],
+        ['Handoff and service ownership', 'Create runbooks, SLOs, escalation paths, access transfer and operating rhythms.', 'Hand a system to a new operator who can resolve a common incident.'],
+        ['Field-to-product feedback', 'Turn repeated customer needs into reusable patterns, not one-off work.', 'Write a product insight that could change a platform roadmap.']
+      ]},
+      { id: 'proof', tag: 'proof', label: 'Proof lane', title: 'Portfolio, casework and interviews', summary: 'Make your judgment inspectable before the interview.', tasks: [
+        ['Portfolio packaging', 'For each project: repository, concise README, architecture, deploy link and short demo.', 'Package one project so a reviewer understands value in two minutes.'],
+        ['Case study practice', 'Narrate ambiguity, clarify constraints, decompose, propose MVP, metrics and rollout.', 'Run three timed cases with a skeptical stakeholder.'],
+        ['System design defense', 'Explain alternatives, bottlenecks, failure modes, security and cost choices.', 'Defend your capstone architecture in a 20-minute mock review.'],
+        ['Practical coding drills', 'Practice debugging integrations, SQL, APIs, data transformation and testing—not only puzzles.', 'Fix a broken service under a 45-minute timer.'],
+        ['Behavioral ownership stories', 'Use concise STAR stories about customer judgment, conflict, delivery and failure.', 'Prepare five stories with measurable outcomes and clear personal ownership.'],
+        ['Targeted company research', 'Study product, customer environment, deployment model, values and current role language.', 'Write a customized FDE thesis for each target company.']
+      ]}
+    ];
+
+    const stateKey = 'fde-fieldbook-2026-progress';
+    let completed = {};
+    try { completed = JSON.parse(localStorage.getItem(stateKey) || '{}'); } catch { completed = {}; }
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    const trackList = document.getElementById('track-list');
+    const search = document.getElementById('search');
+    const empty = document.getElementById('empty');
+    const resultNote = document.getElementById('result-note');
+
+    const totalTasks = tracks.reduce((sum, track) => sum + track.tasks.length, 0);
+    document.getElementById('completion-count').textContent = `0 / ${totalTasks}`;
+
+    function taskId(track, index) { return `${track.id}-${index}`; }
+    function isTaskComplete(track, index) { return Boolean(completed[taskId(track, index)]); }
+    function matchesTrack(track) {
+      const content = [track.title, track.summary, track.label, ...track.tasks.flat()].join(' ').toLowerCase();
+      return (activeFilter === 'all' || track.tag === activeFilter) && (!searchQuery || content.includes(searchQuery));
+    }
+    function safeText(text) {
+      return text.replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
+    }
+    function renderTracks() {
+      trackList.innerHTML = tracks.map((track, trackIndex) => {
+        const checked = track.tasks.filter((_, index) => isTaskComplete(track, index)).length;
+        const taskRows = track.tasks.map((task, index) => {
+          const id = taskId(track, index);
+          const done = Boolean(completed[id]);
+          return `<label class="task ${done ? 'checked' : ''}">
+            <input type="checkbox" data-task="${id}" ${done ? 'checked' : ''} aria-label="Mark ${safeText(task[0])} complete">
+            <span class="task-copy"><b>${safeText(task[0])}</b><span>${safeText(task[1])}</span></span>
+            <span class="task-tag">${safeText(task[2])}</span>
+          </label>`;
+        }).join('');
+        const visible = matchesTrack(track);
+        return `<article class="track ${trackIndex < 2 ? 'open' : ''} ${visible ? '' : 'hidden'}" data-track="${track.id}">
+          <button class="track-head" type="button" aria-expanded="${trackIndex < 2 ? 'true' : 'false'}">
+            <span class="track-title"><small>${safeText(track.label)}</small><b>${safeText(track.title)}</b><span>${safeText(track.summary)}</span></span>
+            <span class="track-progress">${checked} / ${track.tasks.length}</span>
+          </button>
+          <div class="track-body"><div class="task-list">${taskRows}</div></div>
+        </article>`;
+      }).join('');
+      const visibleTracks = [...trackList.querySelectorAll('.track:not(.hidden)')];
+      empty.classList.toggle('visible', visibleTracks.length === 0);
+      const suffix = activeFilter === 'all' ? 'all' : activeFilter;
+      resultNote.textContent = `Showing ${visibleTracks.length} of ${tracks.length} learning lanes${searchQuery ? ` matching “${searchQuery}”` : ` in ${suffix}`}.`;
+      bindTrackEvents();
+    }
+    function bindTrackEvents() {
+      trackList.querySelectorAll('.track-head').forEach(button => button.addEventListener('click', () => {
+        const track = button.closest('.track');
+        const open = track.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(open));
+      }));
+      trackList.querySelectorAll('input[data-task]').forEach(input => input.addEventListener('change', event => {
+        completed[event.target.dataset.task] = event.target.checked;
+        localStorage.setItem(stateKey, JSON.stringify(completed));
+        updateProgress();
+        renderTracks();
+      }));
+    }
+    function updateProgress() {
+      const count = Object.values(completed).filter(Boolean).length;
+      const rate = Math.round((count / totalTasks) * 100);
+      document.getElementById('completion-count').textContent = `${count} / ${totalTasks}`;
+      document.getElementById('completion-rate').textContent = `${rate}%`;
+      const remaining = [];
+      for (const track of tracks) {
+        track.tasks.forEach((task, index) => {
+          if (!isTaskComplete(track, index)) remaining.push({ title: task[0], detail: task[2], lane: track.title });
+        });
+      }
+      const next = remaining.slice(0, 3);
+      document.getElementById('focus-title').textContent = next.length ? 'A tight next step beats an ambitious backlog.' : 'Fieldbook complete. Turn the artifacts into a capstone defense.';
+      document.getElementById('next-list').innerHTML = next.length ? next.map(item => `<div class="next-item"><b>${safeText(item.title)}</b><span>${safeText(item.lane)} · ${safeText(item.detail)}</span></div>`).join('') : '<div class="next-item"><b>Choose a realistic client workflow.</b><span>Turn your completed skills into one production-shaped capstone.</span></div>';
+    }
+
+    document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll('.filter').forEach(item => item.classList.toggle('selected', item === button));
+      renderTracks();
+    }));
+    search.addEventListener('input', () => { searchQuery = search.value.trim().toLowerCase(); renderTracks(); });
+    document.getElementById('reset-progress').addEventListener('click', () => {
+      if (window.confirm('Reset all saved checklist progress in this browser?')) {
+        completed = {};
+        localStorage.removeItem(stateKey);
+        updateProgress();
+        renderTracks();
+      }
+    });
+    document.querySelectorAll('.rail nav a').forEach(link => link.addEventListener('click', () => {
+      document.querySelectorAll('.rail nav a').forEach(item => item.classList.toggle('active', item === link));
+    }));
+
+    updateProgress();
+    renderTracks();
+  </script>
+</body>
+</html>

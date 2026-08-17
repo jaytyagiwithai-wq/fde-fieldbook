@@ -497,6 +497,21 @@
     .skills-card li::before { content: ""; position: absolute; top: 16px; left: 0; width: 5px; height: 1px; background: var(--lime); }
     .skills-card li:last-child { border-bottom: 0; padding-bottom: 0; }
 
+    #research, #atlas { display: none; }
+    .project-rule { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 22px; margin-bottom: 30px; padding: 17px 0; border-top: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); }
+    .project-rule b { color: var(--lime); font: 500 9px/1.4 "DM Mono", ui-monospace, monospace; letter-spacing: .11em; text-transform: uppercase; }
+    .project-rule span { color: #a4a9b5; font-size: 12px; line-height: 1.55; }
+    .project-list { border-top: 1px solid rgba(255,255,255,.12); }
+    .project { display: grid; grid-template-columns: 48px minmax(200px,1.02fr) minmax(170px,.75fr) minmax(190px,.9fr) minmax(220px,1fr); gap: 24px; padding: 30px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .project-index { color: var(--lime); font: 500 10px/1.4 "DM Mono", ui-monospace, monospace; letter-spacing: .09em; }
+    .project-title > p, .project-column > b { display: block; margin: 0; color: #858a97; font: 500 8px/1.35 "DM Mono", ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .project-title h3 { margin: 9px 0 0; color: #f1f3f8; font-size: 23px; line-height: 1.02; letter-spacing: -.06em; }
+    .project-title span { display: block; margin-top: 12px; color: #a0a5b1; font-size: 11px; line-height: 1.62; }
+    .project-column { padding-left: 17px; border-left: 1px solid rgba(255,255,255,.1); }
+    .project-column p { margin: 10px 0 0; color: #b5b9c4; font-size: 11px; line-height: 1.62; }
+    .project-column ol { display: grid; gap: 6px; margin: 10px 0 0; padding-left: 17px; color: #b5b9c4; font-size: 10.5px; line-height: 1.53; }
+    .project-column li::marker { color: var(--lime); font: 500 9px "DM Mono", ui-monospace, monospace; }
+
     .hiring-gate { padding: clamp(34px, 5vw, 64px); background: linear-gradient(129deg, rgba(26,27,39,.95), rgba(18,15,30,.96)); }
     .gate-head h2 { max-width: 720px; }
     .gate-head p { color: #a9aeba; font-size: 13px; line-height: 1.68; }
@@ -526,6 +541,10 @@
       .positioning { max-width: 410px; }
       .roadmap, .research-layout { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project { grid-template-columns: 38px minmax(0,1fr) minmax(0,1fr); gap: 20px; }
+      .project-title { grid-column: 2 / 4; }
+      .project-column { grid-column: span 1; }
+      .project-column:last-child { grid-column: 2 / 4; }
     }
     @media (max-width: 720px) {
       main { padding: 19px 18px 64px; }
@@ -563,6 +582,11 @@
       .atlas-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .skills-card { padding: 22px; }
+      .project-rule { grid-template-columns: 1fr; gap: 7px; }
+      .project { grid-template-columns: 30px minmax(0,1fr); gap: 14px; padding: 25px 0; }
+      .project-title, .project-column, .project-column:last-child { grid-column: 2; }
+      .project-column { margin-top: 4px; padding-left: 14px; }
+      .project-title h3 { font-size: 21px; }
       .ready-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -579,8 +603,7 @@
         <a href="#checklist">Checklist</a>
         <a href="#study-map">Core skills</a>
         <a href="#roadmap">40-week path</a>
-        <a href="#research">Research scan</a>
-        <a href="#atlas">Stack atlas</a>
+        <a href="#projects">Industry builds</a>
         <a href="#hiring-gate">Hiring gate</a>
         <a href="#capstone">Capstone proof</a>
       </nav>
@@ -614,7 +637,7 @@
         <div class="metrics" aria-label="Checklist progress">
           <div class="metric"><b id="completion-count">0 / 90</b><span>capability evidence</span></div>
           <div class="metric"><b id="completion-rate">0%</b><span>readiness built</span></div>
-          <div class="metric"><b>100+</b><span>tools, frameworks &amp; systems mapped</span></div>
+          <div class="metric"><b>5</b><span>industry-grade FDE builds</span></div>
         </div>
       </section>
 
@@ -665,13 +688,13 @@
         </div>
         <div class="skills-grid" aria-label="Core Forward Deployed Engineer skills and frameworks">
           <article class="skills-card"><p>01 / Software engineering</p><h3>Backend foundation</h3><ul><li>Advanced Python</li><li>FastAPI</li><li>Pydantic</li><li>SQLAlchemy</li><li>Alembic</li><li>Authentication: JWT &amp; OAuth</li><li>SQL &amp; MongoDB</li><li>Query Optimization</li><li>Clean Architecture</li><li>REST APIs &amp; OpenAPI</li><li>Redis &amp; Structured Logging</li></ul></article>
-          <article class="skills-card"><p>02 / Cloud &amp; DevOps</p><h3>Deploy and operate</h3><ul><li>AWS</li><li>Azure</li><li>Google Cloud Platform</li><li>AWS Bedrock, Azure OpenAI &amp; Vertex AI</li><li>Docker &amp; Docker Compose</li><li>Kubernetes</li><li>CI/CD Pipelines</li><li>Cloud Deployment</li><li>Monitoring</li><li>Infrastructure as Code / Terraform</li></ul></article>
-          <article class="skills-card"><p>03 / Applied AI</p><h3>Build with LLMs</h3><ul><li>Prompt Engineering</li><li>GPT, Claude &amp; Gemini APIs</li><li>Open-Weight Models</li><li>Large Language Models</li><li>Function Calling</li><li>Structured Outputs</li><li>Prompt as Code</li><li>Fine-Tuning: SFT, LoRA &amp; QLoRA</li></ul></article>
+          <article class="skills-card"><p>02 / Cloud &amp; DevOps</p><h3>Deploy and operate</h3><ul><li>AWS</li><li>Azure</li><li>Google Cloud Platform</li><li>AWS Bedrock, Azure OpenAI &amp; Vertex AI</li><li>Docker &amp; Docker Compose</li><li>Kubernetes</li><li>CI/CD Pipelines</li><li>Cloud Deployment</li><li>Monitoring</li><li>Serving, Caching &amp; Autoscaling</li><li>Infrastructure as Code / Terraform</li></ul></article>
+          <article class="skills-card"><p>03 / Applied AI</p><h3>Build with LLMs</h3><ul><li>Prompt Engineering</li><li>Few-Shot Prompting &amp; Prompt as Code</li><li>GPT, Claude &amp; Gemini APIs</li><li>Open-Weight Models</li><li>Large Language Models</li><li>Function Calling</li><li>Structured Outputs</li><li>Rapid No-Code Prototyping</li><li>Fine-Tuning: SFT, LoRA &amp; QLoRA</li></ul></article>
           <article class="skills-card"><p>04 / RAG &amp; knowledge systems</p><h3>Ground in evidence</h3><ul><li>Embeddings</li><li>Chunking &amp; Metadata</li><li>Vector Databases</li><li>Pinecone, pgvector, Qdrant &amp; Chroma</li><li>Hybrid Search</li><li>Re-ranking &amp; Query Rewriting</li><li>Citations &amp; Multi-Tenant Retrieval</li><li>Hallucination Reduction</li></ul></article>
           <article class="skills-card"><p>05 / AI agent engineering</p><h3>Orchestrate work</h3><ul><li>LangGraph</li><li>LangChain</li><li>CrewAI</li><li>OpenAI Agents SDK</li><li>MCP: Model Context Protocol</li><li>ReAct &amp; Planner-Executor</li><li>Agent Debugging</li><li>Multi-Agent Systems</li><li>Planning, Memory &amp; Tool Calling</li><li>Enterprise Automation</li></ul></article>
-          <article class="skills-card"><p>06 / Evals, LLMOps &amp; safety</p><h3>Measure and govern</h3><ul><li>RAGAS &amp; DeepEval</li><li>Golden Datasets &amp; LLM-as-Judge</li><li>LangSmith, Langfuse &amp; Phoenix</li><li>AI Observability</li><li>Guardrails &amp; Red-Teaming</li><li>Prompt Injection Defence</li><li>AI Security, PII &amp; Audit Trails</li><li>Cost, Latency &amp; Model Routing</li></ul></article>
-          <article class="skills-card"><p>07 / Data &amp; enterprise</p><h3>Integrate and scale</h3><ul><li>Databricks &amp; PySpark</li><li>Delta Lake &amp; Unity Catalog</li><li>Customer Data Schemas &amp; Lineage</li><li>Enterprise System Design</li><li>SOC 2, HIPAA &amp; DPDP</li><li>VPC &amp; On-Prem Deployments</li><li>CRM, ERP &amp; API Integrations</li></ul></article>
-          <article class="skills-card"><p>08 / Consulting skills</p><h3>Deliver with customers</h3><ul><li>Customer Discovery</li><li>Stakeholder Interviews</li><li>Requirement Gathering</li><li>PRDs &amp; Solution Design Documents</li><li>KPI Definition &amp; ROI</li><li>Proposal Writing</li><li>Business Presentation &amp; Demo Craft</li><li>Solution Architecture &amp; Enterprise Communication</li><li>Incident War Rooms &amp; Adoption</li></ul></article>
+          <article class="skills-card"><p>06 / Evals, LLMOps &amp; safety</p><h3>Measure and govern</h3><ul><li>RAGAS &amp; DeepEval</li><li>Golden Datasets &amp; LLM-as-Judge</li><li>LangSmith, Langfuse &amp; Phoenix</li><li>AI Observability</li><li>Guardrails &amp; Red-Teaming</li><li>Prompt Injection Defence</li><li>AI Security, PII &amp; Audit Trails</li><li>Bias Audits &amp; EU AI Act</li><li>Cost, Latency &amp; Model Routing</li></ul></article>
+          <article class="skills-card"><p>07 / Data &amp; enterprise</p><h3>Integrate and scale</h3><ul><li>Databricks &amp; PySpark</li><li>Delta Lake &amp; Unity Catalog</li><li>Customer Data Schemas &amp; Lineage</li><li>Secrets, IAM &amp; Audit Trails</li><li>Enterprise System Design</li><li>SOC 2, HIPAA &amp; DPDP</li><li>VPC &amp; On-Prem Deployments</li><li>CRM, ERP &amp; API Integrations</li></ul></article>
+          <article class="skills-card"><p>08 / Consulting skills</p><h3>Deliver with customers</h3><ul><li>Customer Discovery</li><li>Stakeholder Interviews</li><li>Requirement Gathering</li><li>PRDs &amp; Solution Design Documents</li><li>KPI Definition &amp; ROI</li><li>Proposal Writing</li><li>Business Presentation &amp; Demo Craft</li><li>Solution Architecture &amp; Enterprise Communication</li><li>Stakeholder Alignment &amp; Scope Changes</li><li>AI Product Sense: Build vs Configure</li><li>Incident War Rooms &amp; Adoption</li></ul></article>
         </div>
       </section>
 
@@ -697,6 +720,46 @@
             <p>Software skill is necessary. FDE readiness comes from translating uncertainty into a scoped plan, a safe system, a compelling demonstration, and an adoption path.</p>
             <p class="rule">Default to one sturdy workflow with a clear evaluation before building an autonomous agent or complex platform.</p>
           </aside>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Portfolio-grade FDE builds</p><h2 id="projects-title">Five industry projects<br>that prove judgment.</h2></div>
+          <p>Build these as customer-style deployments, not generic chatbots. Every project needs a baseline, an integration, an evaluation set, safety controls, a business metric, and a live executive demo.</p>
+        </div>
+        <div class="project-rule"><b>Build order</b><span>Start with support or logistics. Use regulated projects once you can show access control, audit trails, evaluation and human approval.</span></div>
+        <div class="project-list">
+          <article class="project">
+            <div class="project-index">01</div><div class="project-title"><p>Financial services</p><h3>Compliance investigation desk</h3><span>Turns policy, case files and transaction notes into a cited analyst brief—never an automatic risk decision.</span></div>
+            <div class="project-column"><b>Impact to prove</b><p>Reduce analyst research time, improve evidence completeness, and make every claim traceable to an approved source.</p></div>
+            <div class="project-column"><b>Tech stack</b><p>Python, FastAPI, PostgreSQL + pgvector, Azure OpenAI or Bedrock, LangGraph, hybrid retrieval, RAGAS, Langfuse, Docker, Terraform.</p></div>
+            <div class="project-column"><b>Build it</b><ol><li>Ingest policies and cases with role-based access.</li><li>Build hybrid retrieval, reranking and citations.</li><li>Connect a mock case system through a narrow tool.</li><li>Add a reviewer approval queue and audit log.</li><li>Red-team prompt injection and evaluate every answer.</li></ol></div>
+          </article>
+          <article class="project">
+            <div class="project-index">02</div><div class="project-title"><p>SaaS and enterprise support</p><h3>Case resolution orchestrator</h3><span>Classifies support tickets, finds grounded answers, drafts replies and proposes safe actions for an agent to approve.</span></div>
+            <div class="project-column"><b>Impact to prove</b><p>Lower time to resolution, first-response time and escalation rate without letting the model close high-risk cases alone.</p></div>
+            <div class="project-column"><b>Tech stack</b><p>FastAPI, OpenAI Agents SDK or LangGraph, Zendesk/Salesforce mock APIs, OAuth, PostgreSQL, Redis, MCP, LangSmith, GitHub Actions, Docker Compose.</p></div>
+            <div class="project-column"><b>Build it</b><ol><li>Model ticket, customer and entitlement data.</li><li>Retrieve product docs with source citations.</li><li>Classify intent and route to deterministic flows.</li><li>Require approval before any external update.</li><li>Track resolution, correction and handoff metrics.</li></ol></div>
+          </article>
+          <article class="project">
+            <div class="project-index">03</div><div class="project-title"><p>Logistics and operations</p><h3>Shipment exception control tower</h3><span>Explains late or at-risk shipments, surfaces the operational reason, and coordinates an approved recovery workflow.</span></div>
+            <div class="project-column"><b>Impact to prove</b><p>Improve on-time recovery, reduce manual exception triage and protect SLA-sensitive orders with earlier intervention.</p></div>
+            <div class="project-column"><b>Tech stack</b><p>Python, FastAPI, PostgreSQL, Kafka or Redpanda, Redis, LangGraph, OpenAI or Claude API, Grafana, OpenTelemetry, Docker, Kubernetes.</p></div>
+            <div class="project-column"><b>Build it</b><ol><li>Stream simulated tracking events and carrier updates.</li><li>Make consumers idempotent and model SLA timers.</li><li>Explain exception reasons from events and playbooks.</li><li>Draft a recovery plan with a human approval step.</li><li>Load-test bursts and demonstrate graceful degradation.</li></ol></div>
+          </article>
+          <article class="project">
+            <div class="project-index">04</div><div class="project-title"><p>Manufacturing and industrial AI</p><h3>Maintenance intelligence workbench</h3><span>Combines sensor patterns, maintenance manuals and parts data to help technicians prepare—not to autonomously control equipment.</span></div>
+            <div class="project-column"><b>Impact to prove</b><p>Reduce diagnosis time, avoid repeated work orders and improve planned-maintenance readiness while keeping a technician in control.</p></div>
+            <div class="project-column"><b>Tech stack</b><p>Databricks, PySpark, Delta Lake, Unity Catalog, FastAPI, Qdrant or pgvector, Claude or OpenAI API, Langfuse, Grafana, Docker.</p></div>
+            <div class="project-column"><b>Build it</b><ol><li>Create a governed sensor and work-order data model.</li><li>Detect simple anomalies with transparent rules.</li><li>Retrieve manuals, safety steps and parts constraints.</li><li>Generate a cited technician checklist.</li><li>Measure usefulness with technician-style test scenarios.</li></ol></div>
+          </article>
+          <article class="project">
+            <div class="project-index">05</div><div class="project-title"><p>Healthcare administration</p><h3>Referral and document intake triage</h3><span>Extracts and validates referral information, routes incomplete packets, and prepares a human review queue. It does not diagnose or recommend treatment.</span></div>
+            <div class="project-column"><b>Impact to prove</b><p>Reduce intake turnaround, missing-document rework and manual data entry while preserving privacy, auditability and escalation paths.</p></div>
+            <div class="project-column"><b>Tech stack</b><p>FastAPI, OCR or Document AI, PostgreSQL, Azure OpenAI or Bedrock, Pydantic, RBAC/OIDC, Presidio-style PII controls, Phoenix, Docker, Terraform.</p></div>
+            <div class="project-column"><b>Build it</b><ol><li>Define a safe administrative scope and data flow.</li><li>Extract structured fields with validation and confidence.</li><li>Mask PII in evaluation data and logs.</li><li>Route uncertain or incomplete records to reviewers.</li><li>Produce a HIPAA/DPDP-style security and rollback brief.</li></ol></div>
+          </article>
         </div>
       </section>
 
@@ -813,8 +876,8 @@
       </section>
 
       <footer>
-        <p>FDE Fieldbook 2026. Research scan completed 18 August 2026. Sources are linked above for direct inspection.</p>
-        <p>Built from the supplied FDE curriculum and current primary-source role and course materials.</p>
+        <p>FDE Fieldbook 2026. A practical curriculum for building, deploying and defending AI systems.</p>
+        <p>Built from supplied FDE curricula, primary-source role material and systems coursework.</p>
       </footer>
     </main>
   </div>

@@ -486,6 +486,17 @@
     .stack-row b { color: var(--lime); font: 500 8px/1.3 "DM Mono", ui-monospace, monospace; }
     .stack-row span { color: #969ba7; font-size: 11px; }
 
+    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.12); border-left: 1px solid rgba(255,255,255,.12); }
+    .skills-card { padding: 27px; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.012); }
+    .skills-card:nth-child(3n + 2) { background: rgba(158,180,255,.024); }
+    .skills-card:nth-child(3n + 3) { background: rgba(185,246,211,.018); }
+    .skills-card > p { margin: 0; color: var(--lime); font: 500 9px/1.3 "DM Mono", ui-monospace, monospace; letter-spacing: .11em; text-transform: uppercase; }
+    .skills-card h3 { margin: 12px 0 0; color: #f0f2f8; font-size: 22px; line-height: 1.05; letter-spacing: -.055em; }
+    .skills-card ul { display: grid; gap: 0; margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.1); }
+    .skills-card li { position: relative; padding: 9px 0 9px 14px; color: #b2b6c2; border-bottom: 1px solid rgba(255,255,255,.075); font-size: 12px; line-height: 1.4; }
+    .skills-card li::before { content: ""; position: absolute; top: 16px; left: 0; width: 5px; height: 1px; background: var(--lime); }
+    .skills-card li:last-child { border-bottom: 0; padding-bottom: 0; }
+
     .hiring-gate { padding: clamp(34px, 5vw, 64px); background: linear-gradient(129deg, rgba(26,27,39,.95), rgba(18,15,30,.96)); }
     .gate-head h2 { max-width: 720px; }
     .gate-head p { color: #a9aeba; font-size: 13px; line-height: 1.68; }
@@ -514,6 +525,7 @@
       .hero-grid { grid-template-columns: 1fr; gap: 42px; }
       .positioning { max-width: 410px; }
       .roadmap, .research-layout { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 720px) {
       main { padding: 19px 18px 64px; }
@@ -549,6 +561,8 @@
       .sources { grid-template-columns: 1fr; }
       .coverage-note, .hiring-gate, .capstone { padding: 28px 22px; }
       .atlas-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skills-card { padding: 22px; }
       .ready-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -563,6 +577,7 @@
       <nav>
         <a href="#start" class="active">Start here</a>
         <a href="#checklist">Checklist</a>
+        <a href="#study-map">Core skills</a>
         <a href="#roadmap">40-week path</a>
         <a href="#research">Research scan</a>
         <a href="#atlas">Stack atlas</a>
@@ -641,6 +656,21 @@
         <p class="tool-note" id="result-note">Showing all 13 learning lanes.</p>
         <div class="track-list" id="track-list"></div>
         <div class="empty" id="empty">No checklist items match that search yet. Try a framework, skill, or project word.</div>
+      </section>
+
+      <section class="section" id="study-map" aria-labelledby="study-map-title">
+        <div class="section-head">
+          <div><p class="eyebrow">Core skills and frameworks</p><h2 id="study-map-title">The literal FDE stack.</h2></div>
+          <p>These are the named languages, skills, frameworks, platforms and consulting capabilities to learn. They are intentionally visible and grouped—no vague labels, no hidden tool lists.</p>
+        </div>
+        <div class="skills-grid" aria-label="Core Forward Deployed Engineer skills and frameworks">
+          <article class="skills-card"><p>01 / Software engineering</p><h3>Backend foundation</h3><ul><li>Advanced Python</li><li>FastAPI</li><li>Authentication: JWT &amp; OAuth</li><li>SQL</li><li>MongoDB</li><li>Query Optimization</li><li>Clean Architecture</li><li>REST APIs</li><li>API Documentation / OpenAPI</li><li>Redis</li></ul></article>
+          <article class="skills-card"><p>02 / Cloud &amp; DevOps</p><h3>Deploy and operate</h3><ul><li>AWS</li><li>Azure</li><li>Docker</li><li>Docker Compose</li><li>CI/CD Pipelines</li><li>Cloud Deployment</li><li>Monitoring</li><li>Infrastructure as Code / Terraform</li></ul></article>
+          <article class="skills-card"><p>03 / Artificial intelligence</p><h3>Build with LLMs</h3><ul><li>Prompt Engineering</li><li>Large Language Models</li><li>Embeddings</li><li>Function Calling</li><li>Structured Outputs</li><li>Vector Databases</li><li>Hybrid Search</li><li>Hallucination Reduction</li></ul></article>
+          <article class="skills-card"><p>04 / AI agent engineering</p><h3>Orchestrate work</h3><ul><li>LangGraph</li><li>LangChain</li><li>CrewAI</li><li>OpenAI Agents SDK</li><li>MCP: Model Context Protocol</li><li>Multi-Agent Systems</li><li>Planning</li><li>Memory</li><li>Tool Calling</li><li>Enterprise Automation</li></ul></article>
+          <article class="skills-card"><p>05 / Data &amp; production AI</p><h3>Measure and govern</h3><ul><li>Databricks</li><li>Langfuse</li><li>LangSmith</li><li>Phoenix</li><li>AI Observability</li><li>Guardrails</li><li>AI Security</li><li>Cost Optimization</li><li>Enterprise System Design</li></ul></article>
+          <article class="skills-card"><p>06 / Consulting skills</p><h3>Deliver with customers</h3><ul><li>Customer Discovery</li><li>Stakeholder Interviews</li><li>Requirement Gathering</li><li>KPI Definition</li><li>Proposal Writing</li><li>Business Presentation</li><li>Solution Architecture</li><li>Enterprise Communication</li></ul></article>
+        </div>
       </section>
 
       <section class="section" id="roadmap" aria-labelledby="roadmap-title">
@@ -904,6 +934,99 @@
         ['Practical coding drills', 'Practice debugging integrations, SQL, APIs, data transformation and testing—not only puzzles.', 'Fix a broken service under a 45-minute timer.'],
         ['Behavioral ownership stories', 'Use concise STAR stories about customer judgment, conflict, delivery and failure.', 'Prepare five stories with measurable outcomes and clear personal ownership.'],
         ['Targeted company research', 'Study product, customer environment, deployment model, values and current role language.', 'Write a customized FDE thesis for each target company.']
+      ]}
+    ];
+
+    const tutorialMap = [
+      { lane: '01 / Code', title: 'Python and APIs', queries: [
+        'Python uv pyproject.toml virtual environments tutorial',
+        'Python type hints mypy Pydantic v2 tutorial',
+        'Python asyncio async await real world tutorial',
+        'pytest fixtures mocking integration tests tutorial',
+        'FastAPI dependency injection Pydantic v2 tutorial',
+        'SQLAlchemy 2.0 async PostgreSQL FastAPI tutorial',
+        'Alembic database migrations FastAPI tutorial'
+      ]},
+      { lane: '02 / Services', title: 'REST, auth and data', queries: [
+        'REST API design pagination filtering idempotency tutorial',
+        'OpenAPI Swagger FastAPI API documentation tutorial',
+        'JWT OAuth2 OIDC RBAC FastAPI tutorial',
+        'PostgreSQL EXPLAIN ANALYZE query optimization tutorial',
+        'PostgreSQL composite indexes query plan tutorial',
+        'Redis caching rate limiting Python FastAPI tutorial',
+        'MongoDB data modeling embed versus reference tutorial'
+      ]},
+      { lane: '03 / Delivery', title: 'Cloud and DevOps', queries: [
+        'Docker multi stage build Python FastAPI tutorial',
+        'Docker Compose FastAPI PostgreSQL Redis tutorial',
+        'GitHub Actions CI CD Python Docker deploy tutorial',
+        'Terraform AWS ECS RDS S3 tutorial',
+        'Azure Container Apps Azure Database PostgreSQL tutorial',
+        'Kubernetes deployment service ingress basics tutorial',
+        'Prometheus Grafana OpenTelemetry monitoring tutorial'
+      ]},
+      { lane: '04 / Models', title: 'LLMs in production', queries: [
+        'LLM API structured outputs Pydantic tutorial',
+        'prompt engineering system prompts few shot examples tutorial',
+        'OpenAI function calling tool schema validation tutorial',
+        'LLM context window management context engineering tutorial',
+        'LLM token cost latency optimization tutorial',
+        'Ollama vLLM local LLM inference tutorial',
+        'LLM fine tuning versus RAG decision tutorial'
+      ]},
+      { lane: '05 / Knowledge', title: 'RAG and retrieval', queries: [
+        'RAG document chunking metadata provenance tutorial',
+        'text embeddings vector search tutorial',
+        'hybrid search BM25 vector search reranking tutorial',
+        'pgvector PostgreSQL RAG tutorial',
+        'Qdrant vector database RAG tutorial',
+        'RAGAS evaluation faithfulness relevance tutorial',
+        'RAG hallucination reduction citations abstention tutorial'
+      ]},
+      { lane: '06 / Automation', title: 'Agents and workflows', queries: [
+        'LangGraph state machine checkpoints tutorial',
+        'OpenAI Agents SDK tools handoffs tutorial',
+        'CrewAI multi agent workflow tutorial',
+        'Model Context Protocol MCP server Python tutorial',
+        'agent planning tool calling memory tutorial',
+        'Temporal durable execution workflow tutorial',
+        'human in the loop approval agent tutorial'
+      ]},
+      { lane: '07 / Trust', title: 'Evals, safety and LLMOps', queries: [
+        'LLM evaluation harness golden dataset tutorial',
+        'Langfuse tracing prompt versioning tutorial',
+        'Arize Phoenix LLM observability tutorial',
+        'OpenTelemetry traces metrics logs tutorial',
+        'Promptfoo LLM red team prompt injection tutorial',
+        'OWASP GenAI Top 10 LLM security tutorial',
+        'LLM guardrails PII data loss prevention tutorial'
+      ]},
+      { lane: '08 / Data', title: 'Data engineering', queries: [
+        'ETL data validation Pandera Python tutorial',
+        'Apache Kafka consumer idempotency tutorial',
+        'PySpark DataFrame transformations tutorial',
+        'Databricks Delta Lake medallion architecture tutorial',
+        'Unity Catalog data governance tutorial',
+        'dbt data quality testing tutorial',
+        'Airbyte data ingestion pipeline tutorial'
+      ]},
+      { lane: '09 / Fieldwork', title: 'Discovery and consulting', queries: [
+        'customer discovery interview questions B2B tutorial',
+        'stakeholder mapping RACI workshop tutorial',
+        'requirements gathering user stories acceptance criteria tutorial',
+        'KPI definition baseline metric target tutorial',
+        'ROI business case automation template tutorial',
+        'solution architecture diagram C4 model tutorial',
+        'technical proposal statement of work tutorial'
+      ]},
+      { lane: '10 / Proof', title: 'Architecture and interview', queries: [
+        'system design API database queue caching tutorial',
+        'distributed systems idempotency retries backpressure tutorial',
+        'API security threat modeling tutorial',
+        'FDE case study interview framework tutorial',
+        'executive technical presentation demo tutorial',
+        'STAR behavioral interview engineering ownership tutorial',
+        'production incident runbook postmortem tutorial'
       ]}
     ];
 

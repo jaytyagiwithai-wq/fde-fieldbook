@@ -666,7 +666,20 @@
     .skills-status { display: flex; align-items: center; gap: 11px; margin: 0 0 27px; padding: 13px 15px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #756862; font: 500 10px/1.4 "DM Mono", monospace; text-transform: uppercase; letter-spacing: .07em; }
     .skills-status b { color: #b53213; font-size: 17px; letter-spacing: -.07em; }
     .skills-status button { margin-left: auto; padding: 3px 0; color: #b53213; border: 0; background: transparent; font: 500 9px/1.4 "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    #checklist { display: none; }
     .skills-status button:hover, .skills-status button:focus-visible { color: #201d1c; outline: none; }
+    .skills-progress-panel { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, .7fr); margin: 0 0 32px; border: 1px solid var(--line); background: #f7ede7; }
+    .progress-summary { padding: 24px 26px; border-right: 1px solid var(--line); }
+    .progress-summary > p, .live-quote > p { margin: 0; color: #b53213; font: 600 9px/1.3 "DM Mono", monospace; letter-spacing: .13em; text-transform: uppercase; }
+    .progress-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; margin: 15px 0 12px; }
+    .progress-meta strong { color: #201d1c; font-size: clamp(27px, 3vw, 40px); letter-spacing: -.075em; }
+    .progress-meta span { color: #7c6b63; font: 500 10px/1.35 "DM Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
+    .core-progress { height: 8px; overflow: hidden; background: #e3d1c7; }
+    .core-progress > span { display: block; width: 0; height: 100%; background: #b53213; transition: width .3s ease; }
+    .progress-note { margin: 12px 0 0; color: #645953; font-size: 12px; line-height: 1.55; }
+    .live-quote { display: flex; min-height: 100%; padding: 24px 26px; flex-direction: column; justify-content: space-between; background: #fffaf7; }
+    .live-quote blockquote { margin: 18px 0 13px; color: #201d1c; font: 500 clamp(19px, 2.1vw, 27px)/1.08 Georgia, "Times New Roman", serif; letter-spacing: -.05em; }
+    .live-quote footer { padding: 0; border: 0; color: #917262; font: 600 9px/1.4 "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
     .skills-grid { grid-template-columns: repeat(2, minmax(0,1fr)); border-color: var(--line); }
     .skills-card, .skills-card:nth-child(3n + 2), .skills-card:nth-child(3n + 3) { padding: 26px; border-color: var(--line); background: #f8efe9; }
     .skills-card:nth-child(4n + 2), .skills-card:nth-child(4n + 3) { background: #fffaf7; }
@@ -725,6 +738,8 @@
       .section { margin-top: 72px; }
       .skills-status { flex-wrap: wrap; }
       .skills-status button { margin-left: 0; }
+      .skills-progress-panel { grid-template-columns: 1fr; }
+      .progress-summary { border-right: 0; border-bottom: 1px solid var(--line); }
       .project { border-color: var(--line); }
     }
   </style>
@@ -739,7 +754,6 @@
       <nav>
         <a href="#start" class="active">Start here</a>
         <a href="#study-map">Skill checklist</a>
-        <a href="#checklist">Proof checklist</a>
         <a href="#roadmap">40-week path</a>
         <a href="#projects">Industry builds</a>
         <a href="#hiring-gate">Hiring gate</a>
@@ -773,8 +787,8 @@
           </aside>
         </div>
         <div class="metrics" aria-label="Checklist progress">
-          <div class="metric"><b id="completion-count">0 / 90</b><span>capability evidence</span></div>
-          <div class="metric"><b id="completion-rate">0%</b><span>readiness built</span></div>
+          <div class="metric"><b id="hero-skill-count">0 / 0</b><span>core skills checked</span></div>
+          <div class="metric"><b id="hero-skill-rate">0%</b><span>topic fluency</span></div>
           <div class="metric"><b>5</b><span>industry-grade FDE builds</span></div>
         </div>
       </section>
@@ -825,6 +839,19 @@
           <p>Each line is a named language, skill, framework or platform you can search directly on YouTube or ChatGPT. Check it only after you can build a small working example with it.</p>
         </div>
         <div class="skills-status"><span>Topic fluency</span><b id="core-skill-count">0 / 0</b><span>topics checked</span><button id="reset-core-skills" type="button">Reset</button></div>
+        <div class="skills-progress-panel" aria-label="Core skill study progress">
+          <div class="progress-summary">
+            <p>Skill checklist progress</p>
+            <div class="progress-meta"><strong id="core-skill-rate">0% complete</strong><span id="core-skill-detail">0 checked</span></div>
+            <div class="core-progress" id="core-progress" role="progressbar" aria-label="Core skill checklist completion" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span></span></div>
+            <p class="progress-note">Check a topic only after you can make a small working example without following the tutorial step by step.</p>
+          </div>
+          <aside class="live-quote" aria-live="polite">
+            <p>Live field note</p>
+            <blockquote id="core-skill-quote">“A framework is learned when it survives a real workflow.”</blockquote>
+            <footer id="core-skill-quote-source">FDE field note / start with one usable thing</footer>
+          </aside>
+        </div>
         <div class="skills-grid" aria-label="Core Forward Deployed Engineer skills and frameworks">
           <article class="skills-card"><p>01 / Software engineering</p><h3>Backend foundation</h3><ul><li>Advanced Python</li><li>FastAPI</li><li>Pydantic</li><li>SQLAlchemy</li><li>Alembic</li><li>Authentication: JWT &amp; OAuth</li><li>SQL &amp; MongoDB</li><li>Query Optimization</li><li>Clean Architecture</li><li>REST APIs &amp; OpenAPI</li><li>Redis &amp; Structured Logging</li></ul></article>
           <article class="skills-card"><p>02 / Cloud &amp; DevOps</p><h3>Deploy and operate</h3><ul><li>AWS</li><li>Azure</li><li>Google Cloud Platform</li><li>AWS Bedrock, Azure OpenAI &amp; Vertex AI</li><li>Docker &amp; Docker Compose</li><li>Kubernetes</li><li>CI/CD Pipelines</li><li>Cloud Deployment</li><li>Monitoring</li><li>Serving, Caching &amp; Autoscaling</li><li>Infrastructure as Code / Terraform</li></ul></article>
@@ -1156,9 +1183,18 @@
     const coreSkillKey = 'fde-fieldbook-2026-core-skills';
     let coreCompleted = {};
     try { coreCompleted = JSON.parse(localStorage.getItem(coreSkillKey) || '{}'); } catch { coreCompleted = {}; }
+    const coreSkillQuotes = [
+      { until: 0, text: '“A framework is learned when it survives a real workflow.”', source: 'FDE field note / start with one usable thing' },
+      { until: 24, text: '“Use the smallest stack that can earn a customer’s trust.”', source: 'FDE field note / favour useful over impressive' },
+      { until: 49, text: '“Every tool call is a product decision.”', source: 'FDE field note / know the workflow behind the model' },
+      { until: 74, text: '“Production readiness is evidence, not optimism.”', source: 'FDE field note / test, trace and measure' },
+      { until: 99, text: '“A good system makes the next decision clearer.”', source: 'FDE field note / improve the operating loop' },
+      { until: 100, text: '“You know the topics. Now build proof that a customer can use.”', source: 'FDE field note / turn fluency into a deployment' }
+    ];
 
     const totalTasks = tracks.reduce((sum, track) => sum + track.tasks.length, 0);
-    document.getElementById('completion-count').textContent = `0 / ${totalTasks}`;
+    const legacyCompletionCount = document.getElementById('completion-count');
+    if (legacyCompletionCount) legacyCompletionCount.textContent = `0 / ${totalTasks}`;
 
     function taskId(track, index) { return `${track.id}-${index}`; }
     function isTaskComplete(track, index) { return Boolean(completed[taskId(track, index)]); }
@@ -1172,7 +1208,20 @@
     function coreSkillId(index) { return `core-skill-${index}`; }
     function updateCoreSkills() {
       const count = coreSkillNames.filter((_, index) => coreCompleted[coreSkillId(index)]).length;
-      document.getElementById('core-skill-count').textContent = `${count} / ${coreSkillNames.length}`;
+      const total = coreSkillNames.length;
+      const rate = total ? Math.round((count / total) * 100) : 0;
+      const quote = coreSkillQuotes.find(item => rate <= item.until) || coreSkillQuotes[coreSkillQuotes.length - 1];
+      document.getElementById('core-skill-count').textContent = `${count} / ${total}`;
+      document.getElementById('hero-skill-count').textContent = `${count} / ${total}`;
+      document.getElementById('core-skill-rate').textContent = `${rate}% complete`;
+      document.getElementById('hero-skill-rate').textContent = `${rate}%`;
+      document.getElementById('core-skill-detail').textContent = `${count} of ${total} topics checked`;
+      const progress = document.getElementById('core-progress');
+      progress.setAttribute('aria-valuemax', total);
+      progress.setAttribute('aria-valuenow', count);
+      progress.querySelector('span').style.width = `${rate}%`;
+      document.getElementById('core-skill-quote').textContent = quote.text;
+      document.getElementById('core-skill-quote-source').textContent = quote.source;
     }
     function initialiseCoreSkills() {
       coreSkillRows.forEach((row, index) => {
@@ -1242,8 +1291,10 @@
     function updateProgress() {
       const count = Object.values(completed).filter(Boolean).length;
       const rate = Math.round((count / totalTasks) * 100);
-      document.getElementById('completion-count').textContent = `${count} / ${totalTasks}`;
-      document.getElementById('completion-rate').textContent = `${rate}%`;
+      const legacyCount = document.getElementById('completion-count');
+      const legacyRate = document.getElementById('completion-rate');
+      if (legacyCount) legacyCount.textContent = `${count} / ${totalTasks}`;
+      if (legacyRate) legacyRate.textContent = `${rate}%`;
       const remaining = [];
       for (const track of tracks) {
         track.tasks.forEach((task, index) => {

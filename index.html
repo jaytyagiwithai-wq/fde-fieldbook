@@ -589,6 +589,144 @@
       .project-title h3 { font-size: 21px; }
       .ready-grid { grid-template-columns: 1fr; }
     }
+
+    /* Editorial checklist redesign, based on the supplied brochure reference. */
+    :root { color-scheme: light; --ink: #201d1c; --muted: #625b57; --quiet: #8d817b; --canvas: #303030; --canvas-2: #fbf5f0; --panel: #f7ede7; --line: #dfd0c7; --line-strong: #c8b3a8; --lime: #b53213; --lime-soft: #f4d9cf; --blue: #201d1c; --coral: #b53213; --rose: #f5e7df; font-family: Manrope, Arial, sans-serif; }
+    body { color: var(--ink); background: #303030; letter-spacing: -.025em; }
+    body::before, body::after { display: none; }
+    .shell { width: min(1440px, 100%); margin: 0 auto; grid-template-columns: 220px minmax(0,1fr); background: #fcf7f3; }
+    .rail { padding: 32px 18px 24px; color: #201d1c; border-right: 1px solid var(--line); background: #f7eee8; backdrop-filter: none; }
+    .wordmark strong { color: #201d1c; font-family: "DM Mono", monospace; font-size: 11px; }
+    .wordmark span { color: #8e6f62; }
+    .rail nav::before { color: #ad3013; }
+    .rail nav a { color: #635b56; font-size: 12px; }
+    .rail nav a::before { background: #bdaaa0; }
+    .rail nav a:hover, .rail nav a:focus-visible, .rail nav a.active { color: #201d1c; }
+    .rail nav a:hover::before, .rail nav a:focus-visible::before, .rail nav a.active::before { background: #b53213; }
+    .rail-bottom { border-top-color: var(--line); }
+    .rail-bottom b { color: #201d1c; }
+    .rail-bottom p { color: #867a74; }
+    main { background: #fcf7f3; padding: 30px clamp(28px, 5vw, 76px) 110px; }
+    .topbar { border-bottom-color: var(--line); }
+    .topbar p, .date { color: #756862 !important; }
+    .date { color: #a12d11 !important; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; color: #b53213; font-family: "DM Mono", monospace; letter-spacing: .13em; }
+    .eyebrow::before { content: "—"; font-size: 18px; line-height: 0; }
+    .hero { min-height: 0; padding: 56px 0 40px; color: #201d1c; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+    .hero::before, .hero::after { display: none; }
+    .hero-grid { grid-template-columns: minmax(0,1.25fr) minmax(250px,.55fr); gap: 64px; }
+    h1 { color: #201d1c; background: none; -webkit-text-fill-color: #201d1c; font-size: clamp(57px, 6.8vw, 94px); font-weight: 800; letter-spacing: -.085em; }
+    h1 em { color: #b53213; font-family: Georgia, "Times New Roman", serif; font-weight: 500; letter-spacing: -.075em; }
+    .hero-copy { color: #463e3a; font-size: 16px; }
+    .hero-copy strong { color: #201d1c; }
+    .positioning { color: #201d1c; border-left-color: #b53213; }
+    .positioning::before { border-color: #b53213; background: #fcf7f3; }
+    .positioning .label { color: #b53213; }
+    .positioning .title { color: #201d1c; }
+    .role-loop { border-top-color: var(--line); }
+    .role-loop span, .positioning .note { color: #665d58; }
+    .hero-cta { color: #fffaf7; border-color: #b53213; background: #b53213; }
+    .hero-cta:hover, .hero-cta:focus-visible { color: #fffaf7; border-color: #7f1d09; background: #7f1d09; }
+    .hero-link { color: #5c514c; }
+    .hero-link:hover, .hero-link:focus-visible { color: #b53213; }
+    .metrics { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .metric { border-left-color: var(--line); }
+    .metric b { color: #201d1c; }
+    .metric span { color: #8e6f62; }
+    .section { margin-top: 94px; }
+    .section-head { border-top: 1px solid var(--line); padding-top: 27px; }
+    h2 { color: #201d1c; font-size: clamp(34px, 4.4vw, 58px); }
+    .section-head p { color: #625954; }
+    .start-grid { border-color: var(--line); }
+    .focus-card { border-right-color: var(--line); }
+    .focus-card h3, .direction h3 { color: #201d1c; }
+    .card-label { color: #b53213; }
+    .next-list, .next-item { border-color: var(--line); }
+    .next-item::before, .text-button { color: #b53213; }
+    .next-item b { color: #201d1c; }
+    .next-item span, .direction p { color: #665d58; }
+    .toolbar { border-bottom-color: var(--line); }
+    .search-wrap input { color: #201d1c; }
+    .search-wrap input::placeholder { color: #998b84; }
+    .filter { color: #766a64; }
+    .filter:hover, .filter:focus-visible, .filter.selected { color: #b53213; box-shadow: inset 0 -1px #b53213; }
+    .tool-note { color: #8a7e77; }
+    .track-list, .track { border-color: var(--line); }
+    .track:hover { background: #f8eee8; border-color: var(--line-strong); }
+    .track-head:focus-visible { outline-color: #b53213; }
+    .track-title small { color: #b53213; }
+    .track-title b, .task-copy b { color: #201d1c; }
+    .track-title span, .task-copy span { color: #675d58; }
+    .track-progress, .task-tag { color: #8a746a; }
+    .track-body, .task-list, .task { border-color: var(--line); }
+    .task input { border-color: #a9897c; }
+    .task input:checked { border-color: #b53213; background: #b53213; }
+    .task input:checked::after { border-color: #fffaf7; }
+
+    .skills-status { display: flex; align-items: center; gap: 11px; margin: 0 0 27px; padding: 13px 15px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #756862; font: 500 10px/1.4 "DM Mono", monospace; text-transform: uppercase; letter-spacing: .07em; }
+    .skills-status b { color: #b53213; font-size: 17px; letter-spacing: -.07em; }
+    .skills-status button { margin-left: auto; padding: 3px 0; color: #b53213; border: 0; background: transparent; font: 500 9px/1.4 "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .skills-status button:hover, .skills-status button:focus-visible { color: #201d1c; outline: none; }
+    .skills-grid { grid-template-columns: repeat(2, minmax(0,1fr)); border-color: var(--line); }
+    .skills-card, .skills-card:nth-child(3n + 2), .skills-card:nth-child(3n + 3) { padding: 26px; border-color: var(--line); background: #f8efe9; }
+    .skills-card:nth-child(4n + 2), .skills-card:nth-child(4n + 3) { background: #fffaf7; }
+    .skills-card > p { color: #b53213; }
+    .skills-card h3 { color: #201d1c; font-size: 25px; }
+    .skills-card ul { border-top-color: var(--line); }
+    .skills-card li { padding: 9px 0; color: #332d2a; border-bottom-color: var(--line); font-size: 12px; }
+    .skills-card li::before { display: none; }
+    .skills-card li.skill-check { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .skill-check input { appearance: none; flex: 0 0 auto; width: 15px; height: 15px; margin: 0; border: 1px solid #9e8376; border-radius: 0; background: #fffaf7; position: relative; cursor: pointer; }
+    .skill-check input:checked { border-color: #b53213; background: #b53213; }
+    .skill-check input:checked::after { content: ""; position: absolute; top: 3px; left: 3px; width: 6px; height: 3px; border-left: 1.5px solid #fffaf7; border-bottom: 1.5px solid #fffaf7; transform: rotate(-45deg); }
+    .skill-check.checked span { color: #8b7970; text-decoration: line-through; text-decoration-color: #b53213; }
+    .skill-check input:focus-visible { outline: 2px solid #b53213; outline-offset: 2px; }
+
+    .roadmap, .research-layout { gap: 42px; }
+    .phase { border-bottom-color: var(--line); }
+    .phase small, .phase em { color: #b53213; }
+    .phase b, .design-card h3 { color: #201d1c; }
+    .phase span, .design-card p { color: #665d58; }
+    .design-card, .gap-panel { border-left-color: #b53213; }
+    .design-card .rule { color: #b53213; border-top-color: var(--line); }
+    .project-rule, .project-list, .project { border-color: var(--line); }
+    .project-rule b, .project-index { color: #b53213; }
+    .project-rule span, .project-title span, .project-column p, .project-column ol { color: #5f5651; }
+    .project-title > p, .project-column > b { color: #b53213; }
+    .project-title h3 { color: #201d1c; }
+    .project-column { border-left-color: var(--line); }
+    .project-column li::marker { color: #b53213; }
+    .hiring-gate, .capstone, .coverage-note { color: #201d1c; border-color: var(--line); background: #f4e9e2; }
+    .gate-head h2, .capstone h2, .coverage-note h3 { color: #201d1c; }
+    .gate-head p, .capstone p, .coverage-note p { color: #5f5651; }
+    .gate-head strong, .coverage-note strong { color: #b53213; }
+    .ready-grid { border-color: var(--line); }
+    .ready-card { border-color: var(--line); background: #fffaf7; }
+    .ready-card b { color: #201d1c; }
+    .ready-card span { color: #665d58; }
+    .deliverables { background: var(--line); }
+    .deliverable { background: #fffaf7; }
+    .deliverable b { color: #201d1c; }
+    .deliverable span { color: #665d58; }
+    footer { border-top-color: var(--line); color: #85766e; }
+
+    @media (max-width: 960px) {
+      .shell { width: 100%; }
+      .rail { background: #f7eee8; border-bottom-color: var(--line); }
+      .hero-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      body { background: #fcf7f3; }
+      .rail { padding: 16px 18px; }
+      main { padding: 18px 18px 70px; }
+      .hero { padding: 38px 0 30px; }
+      h1 { font-size: clamp(48px, 16vw, 68px); }
+      .section { margin-top: 72px; }
+      .skills-status { flex-wrap: wrap; }
+      .skills-status button { margin-left: 0; }
+      .project { border-color: var(--line); }
+    }
   </style>
 </head>
 <body>
@@ -600,8 +738,8 @@
       </div>
       <nav>
         <a href="#start" class="active">Start here</a>
-        <a href="#checklist">Checklist</a>
-        <a href="#study-map">Core skills</a>
+        <a href="#study-map">Skill checklist</a>
+        <a href="#checklist">Proof checklist</a>
         <a href="#roadmap">40-week path</a>
         <a href="#projects">Industry builds</a>
         <a href="#hiring-gate">Hiring gate</a>
@@ -623,9 +761,9 @@
         <div class="hero-grid">
           <div>
             <p class="eyebrow">Forward deployed engineer</p>
-            <h1>Make the<br>deployment real.</h1>
+            <h1>Make the<br><em>deployment</em> real.</h1>
             <p class="hero-copy">A field guide for becoming the engineer who can <strong>find the costly problem, design the smallest credible system, ship it safely, and earn adoption.</strong> Built from current FDE role signals, systems courses, and applied AI programs.</p>
-            <div class="hero-actions"><a class="hero-cta" href="#checklist">Start the capability map</a><a class="hero-link" href="#roadmap">See the 40-week sequence</a></div>
+            <div class="hero-actions"><a class="hero-cta" href="#study-map">Open the skills checklist</a><a class="hero-link" href="#projects">See the industry builds</a></div>
           </div>
           <aside class="positioning">
             <p class="label">The FDE operating loop</p>
@@ -663,8 +801,8 @@
 
       <section class="section" id="checklist" aria-labelledby="checklist-title">
         <div class="section-head">
-          <div><p class="eyebrow">The field checklist</p><h2 id="checklist-title">What you need to be able to do</h2></div>
-          <p>90 capabilities arranged in the order they connect in actual deployments. Search a skill, or filter the lane you are working on.</p>
+          <div><p class="eyebrow">Proof checklist</p><h2 id="checklist-title">What you must<br>demonstrate.</h2></div>
+          <p>These are not tool names. They are the 90 deployment capabilities and proof artifacts that show you can use the skills in a real customer environment.</p>
         </div>
         <div class="toolbar">
           <label class="search-wrap" for="search"><input id="search" type="search" autocomplete="off" aria-label="Search the FDE capability map" placeholder="Search skills, systems, frameworks, or proof…"></label>
@@ -683,9 +821,10 @@
 
       <section class="section" id="study-map" aria-labelledby="study-map-title">
         <div class="section-head">
-          <div><p class="eyebrow">Core skills and frameworks</p><h2 id="study-map-title">The literal FDE stack.</h2></div>
-          <p>These are the named languages, skills, frameworks, platforms and consulting capabilities to learn. They are intentionally visible and grouped—no vague labels, no hidden tool lists.</p>
+          <div><p class="eyebrow">Core skills checklist</p><h2 id="study-map-title">The literal FDE stack.</h2></div>
+          <p>Each line is a named language, skill, framework or platform you can search directly on YouTube or ChatGPT. Check it only after you can build a small working example with it.</p>
         </div>
+        <div class="skills-status"><span>Topic fluency</span><b id="core-skill-count">0 / 0</b><span>topics checked</span><button id="reset-core-skills" type="button">Reset</button></div>
         <div class="skills-grid" aria-label="Core Forward Deployed Engineer skills and frameworks">
           <article class="skills-card"><p>01 / Software engineering</p><h3>Backend foundation</h3><ul><li>Advanced Python</li><li>FastAPI</li><li>Pydantic</li><li>SQLAlchemy</li><li>Alembic</li><li>Authentication: JWT &amp; OAuth</li><li>SQL &amp; MongoDB</li><li>Query Optimization</li><li>Clean Architecture</li><li>REST APIs &amp; OpenAPI</li><li>Redis &amp; Structured Logging</li></ul></article>
           <article class="skills-card"><p>02 / Cloud &amp; DevOps</p><h3>Deploy and operate</h3><ul><li>AWS</li><li>Azure</li><li>Google Cloud Platform</li><li>AWS Bedrock, Azure OpenAI &amp; Vertex AI</li><li>Docker &amp; Docker Compose</li><li>Kubernetes</li><li>CI/CD Pipelines</li><li>Cloud Deployment</li><li>Monitoring</li><li>Serving, Caching &amp; Autoscaling</li><li>Infrastructure as Code / Terraform</li></ul></article>
@@ -1012,6 +1151,11 @@
     const search = document.getElementById('search');
     const empty = document.getElementById('empty');
     const resultNote = document.getElementById('result-note');
+    const coreSkillRows = [...document.querySelectorAll('.skills-card li')];
+    const coreSkillNames = coreSkillRows.map(row => row.textContent.trim());
+    const coreSkillKey = 'fde-fieldbook-2026-core-skills';
+    let coreCompleted = {};
+    try { coreCompleted = JSON.parse(localStorage.getItem(coreSkillKey) || '{}'); } catch { coreCompleted = {}; }
 
     const totalTasks = tracks.reduce((sum, track) => sum + track.tasks.length, 0);
     document.getElementById('completion-count').textContent = `0 / ${totalTasks}`;
@@ -1024,6 +1168,36 @@
     }
     function safeText(text) {
       return text.replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
+    }
+    function coreSkillId(index) { return `core-skill-${index}`; }
+    function updateCoreSkills() {
+      const count = coreSkillNames.filter((_, index) => coreCompleted[coreSkillId(index)]).length;
+      document.getElementById('core-skill-count').textContent = `${count} / ${coreSkillNames.length}`;
+    }
+    function initialiseCoreSkills() {
+      coreSkillRows.forEach((row, index) => {
+        const id = coreSkillId(index);
+        const checked = Boolean(coreCompleted[id]);
+        row.classList.add('skill-check');
+        row.classList.toggle('checked', checked);
+        row.innerHTML = `<input type="checkbox" data-core-skill="${id}" ${checked ? 'checked' : ''} aria-label="Mark ${safeText(coreSkillNames[index])} complete"><span>${safeText(coreSkillNames[index])}</span>`;
+      });
+      document.querySelectorAll('input[data-core-skill]').forEach(input => input.addEventListener('change', event => {
+        const row = event.target.closest('.skill-check');
+        coreCompleted[event.target.dataset.coreSkill] = event.target.checked;
+        row.classList.toggle('checked', event.target.checked);
+        localStorage.setItem(coreSkillKey, JSON.stringify(coreCompleted));
+        updateCoreSkills();
+      }));
+      document.getElementById('reset-core-skills').addEventListener('click', () => {
+        if (window.confirm('Reset all saved core-skill progress in this browser?')) {
+          coreCompleted = {};
+          localStorage.removeItem(coreSkillKey);
+          document.querySelectorAll('input[data-core-skill]').forEach(input => { input.checked = false; input.closest('.skill-check').classList.remove('checked'); });
+          updateCoreSkills();
+        }
+      });
+      updateCoreSkills();
     }
     function renderTracks() {
       trackList.innerHTML = tracks.map((track, trackIndex) => {
@@ -1101,6 +1275,7 @@
 
     updateProgress();
     renderTracks();
+    initialiseCoreSkills();
   </script>
 </body>
 </html>

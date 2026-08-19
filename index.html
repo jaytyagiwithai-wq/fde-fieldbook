@@ -742,6 +742,68 @@
       .progress-summary { border-right: 0; border-bottom: 1px solid var(--line); }
       .project { border-color: var(--line); }
     }
+
+    /* Phone-first layout: preserve readable type and touch-sized controls at 320–720px. */
+    @media (max-width: 720px) {
+      html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+      .rail { display: block; height: auto; overflow: visible; padding: 14px 18px 0; }
+      .wordmark { padding: 0 0 12px; }
+      .rail nav { display: flex; width: calc(100% + 36px); margin: 0 -18px; padding: 0 18px 12px; gap: 5px; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none; white-space: nowrap; }
+      .rail nav::-webkit-scrollbar { display: none; }
+      .rail nav a { display: inline-flex; flex: 0 0 auto; align-items: center; min-height: 42px; padding: 9px 12px 9px 16px; font-size: 11px; }
+      .topbar { min-height: auto; margin-bottom: 20px; padding-bottom: 12px; }
+      .topbar p:not(.date) { display: none; }
+      .hero { padding: 32px 0 28px; }
+      .hero-grid { gap: 28px; }
+      h1 { max-width: 100%; font-size: clamp(44px, 14vw, 64px); line-height: .92; overflow-wrap: anywhere; }
+      .hero-copy { margin-top: 18px; font-size: 14px; line-height: 1.6; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 14px 18px; margin-top: 22px; }
+      .hero-cta { display: inline-flex; align-items: center; min-height: 44px; padding: 11px 14px; }
+      .hero-link { display: inline-flex; align-items: center; min-height: 44px; }
+      .positioning { max-width: none; padding-left: 18px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 30px; }
+      .metric { min-width: 0; padding: 14px 12px; }
+      .metric:nth-child(3) { grid-column: 1 / -1; padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
+      .metric b { font-size: 23px; }
+      .metric span { font-size: 9px; line-height: 1.45; }
+      .section { margin-top: 62px; scroll-margin-top: 110px; }
+      .section-head { gap: 0; margin-bottom: 20px; padding-top: 20px; }
+      h2 { font-size: clamp(32px, 10vw, 42px); line-height: 1; }
+      .section-head p { margin-top: 13px; font-size: 13px; line-height: 1.6; }
+      .skills-status { align-items: center; gap: 5px 9px; margin-bottom: 14px; padding: 12px 0; font-size: 9px; }
+      .skills-status b { font-size: 18px; }
+      .skills-status button { margin-left: auto; min-height: 38px; padding: 6px 0; }
+      .skills-progress-panel { margin-bottom: 22px; }
+      .progress-summary, .live-quote { padding: 20px 18px; }
+      .progress-meta { flex-direction: column; align-items: flex-start; gap: 3px; margin: 13px 0 12px; }
+      .progress-meta strong { font-size: 31px; }
+      .progress-note { font-size: 12px; line-height: 1.6; }
+      .live-quote blockquote { margin: 15px 0 12px; font-size: 23px; line-height: 1.14; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skills-card { padding: 21px 17px; }
+      .skills-card h3 { font-size: 23px; }
+      .skills-card li.skill-check { min-height: 44px; padding: 10px 0; align-items: flex-start; line-height: 1.35; }
+      .skill-check input { width: 18px; height: 18px; margin-top: 1px; }
+      .skill-check input:checked::after { top: 4px; left: 4px; width: 7px; height: 4px; }
+      .project { grid-template-columns: 26px minmax(0, 1fr); gap: 12px; padding: 23px 0; }
+      .project-title, .project-column, .project-column:last-child { grid-column: 2; min-width: 0; }
+      .project-column { padding-left: 13px; }
+      .project-title h3 { font-size: 22px; }
+      .project-title span, .project-column p, .project-column ol { overflow-wrap: anywhere; }
+      .hiring-gate, .capstone, .coverage-note { padding: 26px 18px; }
+      .ready-grid { grid-template-columns: 1fr; }
+      footer { margin-top: 62px; padding-top: 16px; }
+    }
+
+    @media (max-width: 380px) {
+      main { padding-inline: 15px; }
+      .rail { padding-inline: 15px; }
+      .rail nav { width: calc(100% + 30px); margin-inline: -15px; padding-inline: 15px; }
+      h1 { font-size: 43px; }
+      .hero-cta { width: 100%; justify-content: center; }
+      .metric b { font-size: 21px; }
+      .skills-status button { margin-left: 0; }
+    }
   </style>
 </head>
 <body>
